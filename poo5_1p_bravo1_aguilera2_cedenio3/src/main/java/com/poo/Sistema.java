@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class Sistema {
     
     private ArrayList<Usuario> listaUsuario;
-    private ArrayList<Espacio> listaEspacio;
+    private ArrayList<TIPO> listaEspacio;
     private ArrayList<Reserva> listaReserva;
 
     public void mostrar_menu(){
