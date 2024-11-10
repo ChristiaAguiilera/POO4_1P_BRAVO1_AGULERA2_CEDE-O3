@@ -5,13 +5,23 @@ import java.util.Date;
 public class Reserva {
     private int codigo;
     private Date fecha;
-    private ESTADO tipo_reserva;
+    private ESTADO estado;
     private TIPO tipo_espacio;
-    private String nombre;
+    private String nombre_espacio;
     private int capacidad;
     private Usuario nombre_user;
     public static int numeroReservas;
 
+    public Reserva(int codigo, Date fecha, String nombre, ESTADO estado, TIPO tipo_espacio, Usuario nombre_user, int capacidad){
+        this.codigo = codigo;
+        this.fecha = fecha;
+        this.nombre_espacio = nombre;
+        this.capacidad = capacidad;
+        this.estado = estado;
+        this.tipo_espacio = tipo_espacio;
+        this.nombre_user = nombre_user;
+    }
+    
     public void consultar(Date fecha){
 
     }
@@ -23,6 +33,8 @@ public class Reserva {
     public void consultar_reserva(Usuario rol){
 
     }
+
+    // getters y setters
 
     public int getCodigo(){
         return codigo;
@@ -40,12 +52,29 @@ public class Reserva {
         this.fecha = fecha;
     }
 
-    public String getNombre(){
-        return nombre;
+    public ESTADO getEstado(){
+        return estado;
     }
 
-    public void setNombre(Sting nombre){
-        this.nombre = nombre;
+    public void setEstado(ESTADO estado){
+        this.estado = estado;
+    }
+
+    public TIPO getTipoEspacio(){
+        return tipo_espacio;
+    }
+
+    public void setTipoEspacio(TIPO tipo_espacio){
+        this.tipo_espacio = tipo_espacio;
+    }
+
+
+    public String getNombreEspacio(){
+        return nombre_espacio;
+    }
+
+    public void setNombreEspacio(String nombre){
+        this.nombre_espacio = nombre;
     }
 
     public int getCapacidad(){
@@ -57,6 +86,10 @@ public class Reserva {
     }
 
     public Usuario getUsuario(){
-        return Usuario;
+        return nombre_user;
+    }
+
+    public void setUsuario(Usuario usuario){
+        this.nombre_user = usuario;
     }
 }
