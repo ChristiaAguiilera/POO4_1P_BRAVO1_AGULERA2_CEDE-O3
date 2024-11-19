@@ -9,7 +9,7 @@ public class Usuario {
     private String correo;
     private String rol;
 
-    public Usuario(int codigo, int cedula, String nombre, String apellido,String usuario, String contrasena, String correo, String rol){
+    public Usuario(int codigo, int cedula, String nombre, String apellido, String usuario, String contrasena, String correo, String rol){
         this.codigo=codigo;
         this.cedula=cedula;
         this.nombre=nombre;
