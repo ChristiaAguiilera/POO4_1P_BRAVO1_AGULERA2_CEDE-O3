@@ -4,9 +4,19 @@ public class Usuario {
     private int cedula;
     private String nombre;
     private String apellido;
+    private String usuario;
     private String contrasena;
     private String correo;
     private String rol;
+
+    public Usuario(int codigo, int cedula, String nombre, String apellido,String usuario, String contrasena, String correo, String rol){
+        this.codigo=codigo;
+        this.cedula=cedula;
+        this.nombre=nombre;
+        this.apellido=apellido;
+        this.contrasena=contrasena;
+
+    }
 
     public int getCodigo() {
         return codigo;
