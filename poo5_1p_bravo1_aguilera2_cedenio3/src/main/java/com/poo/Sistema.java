@@ -2,6 +2,8 @@ package com.poo;
 
 import java.util.ArrayList;
 
+import com.poo.Usuario.Usuario;
+
 public class Sistema {
     
     private ArrayList<Usuario> listaUsuario;

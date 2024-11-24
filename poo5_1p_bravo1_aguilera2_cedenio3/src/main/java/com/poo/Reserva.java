@@ -2,6 +2,8 @@ package com.poo;
 
 import java.util.Date;
 
+import com.poo.Usuario.Usuario;
+
 public class Reserva {
     private int codigo;
     private Date fecha;

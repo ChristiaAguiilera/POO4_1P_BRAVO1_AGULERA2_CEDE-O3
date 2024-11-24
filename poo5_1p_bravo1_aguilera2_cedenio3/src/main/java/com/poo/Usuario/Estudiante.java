@@ -1,5 +1,8 @@
-package com.poo;
+package com.poo.Usuario;
 import java.util.Scanner;
+
+import com.poo.Usuario;
+
 import java.util.Date;
 
 public class Estudiante extends Usuario {

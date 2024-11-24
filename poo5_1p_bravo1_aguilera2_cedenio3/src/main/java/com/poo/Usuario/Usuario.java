@@ -1,4 +1,5 @@
-package com.poo;
+package com.poo.Usuario;
+
 public class Usuario {
     private int codigo;
     private int cedula;
@@ -15,7 +16,6 @@ public class Usuario {
         this.nombre=nombre;
         this.apellido=apellido;
         this.contrasena=contrasena;
-
     }
 
     public int getCodigo() {
