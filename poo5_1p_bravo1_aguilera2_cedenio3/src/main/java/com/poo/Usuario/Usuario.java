@@ -1,6 +1,6 @@
 package com.poo.Usuario;
 
-public class Usuario {
+public abstract class Usuario {
     private int codigo;
     private int cedula;
     private String nombre;
@@ -10,14 +10,30 @@ public class Usuario {
     private String correo;
     private String rol;
 
-    public Usuario(int codigo, int cedula, String nombre, String apellido, String usuario, String contrasena, String correo, String rol){
+    public Usuario(int codigo, int cedula, String nombre, String apellido, 
+                    String usuario, String contrasena, String correo, String rol){
         this.codigo=codigo;
         this.cedula=cedula;
         this.nombre=nombre;
         this.apellido=apellido;
         this.contrasena=contrasena;
+        this.usuario = usuario;
     }
 
+    //metodos
+    public abstract void reservar();
+    
+    public void consultar_reserva(){
+
+    }
+    public void enviar_correo(){
+
+    }
+    public void enviar_correo(String materia){
+        
+    }
+
+    // getteres y setters
     public int getCodigo() {
         return codigo;
     }
@@ -74,18 +90,6 @@ public class Usuario {
         this.rol = rol;
     }
 
-    //metodos
-    public void reservar(){
-
-    }
-    public void consultar_reserva(){
-
-    }
-    public void enviar_correo(){
-
-    }
-    public void enviar_correo(String materia){
-        
-    }
+    
 
 }

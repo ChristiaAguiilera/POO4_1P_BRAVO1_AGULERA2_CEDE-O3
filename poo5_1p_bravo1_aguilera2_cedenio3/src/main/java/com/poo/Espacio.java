@@ -2,6 +2,9 @@ package com.poo;
 import java.io.*;
 import java.util.ArrayList;
 
+import com.poo.Enums.ESTADO;
+import com.poo.Enums.TIPO;
+
 public class Espacio {
     // Atributos
     private int codigo;

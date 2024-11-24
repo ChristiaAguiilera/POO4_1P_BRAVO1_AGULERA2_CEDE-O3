@@ -2,6 +2,8 @@ package com.poo;
 
 import java.util.Date;
 
+import com.poo.Enums.ESTADO;
+import com.poo.Enums.TIPO;
 import com.poo.Usuario.Usuario;
 
 public class Reserva {
