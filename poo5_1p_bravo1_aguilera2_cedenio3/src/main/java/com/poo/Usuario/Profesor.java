@@ -37,7 +37,7 @@ public class Profesor extends Usuario {
     // Métodos específicos
     public void reservar(String materia) {
         if (listaMaterias.contains(materia)) {
-            System.out.println("Reserva realizada por el profesor: " + getNombres() + " para la materia: " + materia);
+            System.out.println("Reserva realizada por el profesor: " + getNombre() + " para la materia: " + materia);
             
         } else {
             System.out.println("Error: La materia '" + materia + "' no está asociada al profesor.");
@@ -45,14 +45,14 @@ public class Profesor extends Usuario {
     }
 
     public void consultar_reserva() {
-        System.out.println("Consultando reservas realizadas por el profesor: " + getNombres());
+        System.out.println("Consultando reservas realizadas por el profesor: " + getNombre());
     }
 
     @Override
     public String toString() {
         return "Profesor {" +
                 "Código: " + getCodigo() +
-                ", Nombre: " + getNombres() + " " + getApellidos() +
+                ", Nombre: " + getNombre() + " " + getApellido() +
                 ", Facultad: " + facultad +
                 ", Materias: " + listaMaterias +
                 "}";

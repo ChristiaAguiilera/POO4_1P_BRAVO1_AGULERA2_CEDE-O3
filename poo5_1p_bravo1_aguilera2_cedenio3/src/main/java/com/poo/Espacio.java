@@ -2,23 +2,23 @@ package com.poo;
 import java.io.*;
 import java.util.ArrayList;
 
-import com.poo.Enums.ESTADO;
-import com.poo.Enums.TIPO;
+import com.poo.Enums.Estado;
+import com.poo.Enums.Tipo;
 
 public class Espacio {
     // Atributos
     private int codigo;
-    private TIPO tipo;
+    private Tipo tipo;
     private String nombre;
     private int capacidad;
-    private ESTADO estado;
+    private Estado estado;
     private String permiso;
 
     // Lista estática para almacenar todos los espacios
     private static ArrayList<Espacio> listaEspacios = new ArrayList<>();
 
     // Constructor
-    public Espacio(int codigo, TIPO tipo, String nombre, int capacidad, ESTADO estado, String permiso) {
+    public Espacio(int codigo, Tipo tipo, String nombre, int capacidad, Estado estado, String permiso) {
         this.codigo = codigo;
         this.tipo = tipo;
         this.nombre = nombre;
@@ -34,10 +34,10 @@ public class Espacio {
             while ((linea = br.readLine()) != null) {
                 String[] datos = linea.split("\\|");
                 int codigo = Integer.parseInt(datos[0].trim());
-                TIPO tipo = TIPO.valueOf(datos[1].trim());
+                Tipo tipo = Tipo.valueOf(datos[1].trim());
                 String nombre = datos[2].trim();
                 int capacidad = Integer.parseInt(datos[3].trim());
-                ESTADO estado = ESTADO.valueOf(datos[4].trim());
+                Estado estado = Estado.valueOf(datos[4].trim());
                 String permiso = datos[5].trim();
 
                 // Crear y agregar espacio a la lista
@@ -70,7 +70,7 @@ public class Espacio {
         boolean hayDisponibles = false;
 
         for (Espacio espacio : listaEspacios) {
-            if (espacio.getEstado() == ESTADO.DISPONIBLE) {
+            if (espacio.getEstado() == Estado.DISPONIBLE) {
                 System.out.println("Código: " + espacio.getCodigo() +
                                    ", Tipo: " + espacio.getTipo() +
                                    ", Nombre: " + espacio.getNombre() +
@@ -90,7 +90,7 @@ public class Espacio {
         return codigo;
     }
 
-    public TIPO getTipo() {
+    public Tipo getTipo() {
         return tipo;
     }
 
@@ -102,7 +102,7 @@ public class Espacio {
         return capacidad;
     }
 
-    public ESTADO getEstado() {
+    public Estado getEstado() {
         return estado;
     }
 

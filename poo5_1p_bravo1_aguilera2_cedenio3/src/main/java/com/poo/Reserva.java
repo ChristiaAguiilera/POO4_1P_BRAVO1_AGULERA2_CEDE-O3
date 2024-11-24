@@ -2,21 +2,23 @@ package com.poo;
 
 import java.util.Date;
 
-import com.poo.Enums.ESTADO;
-import com.poo.Enums.TIPO;
+
+import com.poo.Enums.Estado;
+import com.poo.Enums.Tipo;
 import com.poo.Usuario.Usuario;
 
 public class Reserva {
     private int codigo;
     private Date fecha;
-    private ESTADO estado;
-    private TIPO tipo_espacio;
+    private Estado estado;
+    private Tipo tipo_espacio;
     private String nombre_espacio;
     private int capacidad;
     private Usuario nombre_user;
     public static int numeroReservas;
 
-    public Reserva(int codigo, Date fecha, String nombre, ESTADO estado, TIPO tipo_espacio, Usuario nombre_user, int capacidad){
+    public Reserva(int codigo, Date fecha, String nombre, Estado estado, Tipo tipo_espacio, 
+                                                        Usuario nombre_user, int capacidad){
         this.codigo = codigo;
         this.fecha = fecha;
         this.nombre_espacio = nombre;
@@ -56,19 +58,19 @@ public class Reserva {
         this.fecha = fecha;
     }
 
-    public ESTADO getEstado(){
+    public Estado getEstado(){
         return estado;
     }
 
-    public void setEstado(ESTADO estado){
+    public void setEstado(Estado estado){
         this.estado = estado;
     }
 
-    public TIPO getTipoEspacio(){
+    public Tipo getTipoEspacio(){
         return tipo_espacio;
     }
 
-    public void setTipoEspacio(TIPO tipo_espacio){
+    public void setTipoEspacio(Tipo tipo_espacio){
         this.tipo_espacio = tipo_espacio;
     }
 

@@ -1,15 +1,18 @@
 package com.poo.Usuario;
 
-public class Administrador extends Usuario{
-    private String cargo;
+import com.poo.Enums.Cargo;
 
-    public Administrador(int codigo, int cedula, String nombre, String apellido, String usuario, String contrasena, String correo, String rol, String cargo){
+public class Administrador extends Usuario{
+    private Cargo cargo;
+
+    public Administrador(int codigo, int cedula, String nombre, String apellido, String usuario, 
+                                        String contrasena, String correo, String rol, Cargo cargo){
         super(codigo, cedula, nombre, apellido, usuario, contrasena, correo, rol);
         this.cargo = cargo;
     }
 
     public void reservar(){
-        
+
     }
 
     

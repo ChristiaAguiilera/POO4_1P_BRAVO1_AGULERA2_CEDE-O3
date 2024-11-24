@@ -1,5 +1,7 @@
 package com.poo.Usuario;
 
+import java.util.Date;
+
 public abstract class Usuario {
     private int codigo;
     private int cedula;
@@ -22,7 +24,7 @@ public abstract class Usuario {
 
     //metodos
     public abstract void reservar();
-    
+
     public void consultar_reserva(){
 
     }
