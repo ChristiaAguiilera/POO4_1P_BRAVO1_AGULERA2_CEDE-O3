@@ -57,4 +57,10 @@ public class Profesor extends Usuario {
                 ", Materias: " + listaMaterias +
                 "}";
     }
+
+    @Override
+    public void reservar() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'reservar'");
+    }
 }

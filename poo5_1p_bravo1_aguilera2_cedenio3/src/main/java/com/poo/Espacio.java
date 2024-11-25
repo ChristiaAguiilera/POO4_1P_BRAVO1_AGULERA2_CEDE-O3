@@ -14,9 +14,6 @@ public class Espacio {
     private Estado estado;
     private String permiso;
 
-    // Lista estática para almacenar todos los espacios
-    private static ArrayList<Espacio> listaEspacios = new ArrayList<>();
-
     // Constructor
     public Espacio(int codigo, Tipo tipo, String nombre, int capacidad, Estado estado, String permiso) {
         this.codigo = codigo;
@@ -28,29 +25,7 @@ public class Espacio {
     }
 
     // Método para cargar los espacios desde un archivo
-    public static void cargarEspaciosDesdeArchivo(String nombreArchivo) {
-        try (BufferedReader br = new BufferedReader(new FileReader(nombreArchivo))) {
-            String linea;
-            while ((linea = br.readLine()) != null) {
-                String[] datos = linea.split("\\|");
-                int codigo = Integer.parseInt(datos[0].trim());
-                Tipo tipo = Tipo.valueOf(datos[1].trim());
-                String nombre = datos[2].trim();
-                int capacidad = Integer.parseInt(datos[3].trim());
-                Estado estado = Estado.valueOf(datos[4].trim());
-                String permiso = datos[5].trim();
-
-                // Crear y agregar espacio a la lista
-                Espacio espacio = new Espacio(codigo, tipo, nombre, capacidad, estado, permiso);
-                listaEspacios.add(espacio);
-            }
-            System.out.println("Espacios cargados exitosamente desde el archivo.");
-        } catch (IOException e) {
-            System.out.println("Error al leer el archivo: " + e.getMessage());
-        } catch (Exception e) {
-            System.out.println("Error en el formato del archivo: " + e.getMessage());
-        }
-    }
+    
 
     // Método para mostrar la disponibilidad de un espacio
     public void mostrarDisponibilidad() {
@@ -65,26 +40,7 @@ public class Espacio {
     }
 
     // Método para mostrar los espacios disponibles
-    public static void mostrar_espacios_disponibles() {
-        System.out.println("----- Espacios Disponibles -----");
-        boolean hayDisponibles = false;
-
-        for (Espacio espacio : listaEspacios) {
-            if (espacio.getEstado() == Estado.DISPONIBLE) {
-                System.out.println("Código: " + espacio.getCodigo() +
-                                   ", Tipo: " + espacio.getTipo() +
-                                   ", Nombre: " + espacio.getNombre() +
-                                   ", Capacidad: " + espacio.getCapacidad() +
-                                   ", Permiso: " + espacio.getPermiso());
-                hayDisponibles = true;
-            }
-        }
-
-        if (!hayDisponibles) {
-            System.out.println("No hay espacios disponibles en este momento.");
-        }
-        System.out.println("---------------------------------");
-    }
+    
 
     public int getCodigo() {
         return codigo;
@@ -108,6 +64,12 @@ public class Espacio {
 
     public String getPermiso() {
         return permiso;
+    }
+
+    @Override
+    public String toString() {
+        return "Espacio [codigo=" + codigo + ", tipo=" + tipo + ", nombre=" + nombre + ", capacidad=" + capacidad
+                + ", estado=" + estado + ", permiso=" + permiso + "]";
     }
 }
 

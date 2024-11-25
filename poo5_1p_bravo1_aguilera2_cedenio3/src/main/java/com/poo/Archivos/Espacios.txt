@@ -1,0 +1,10 @@
+101|AULA             | Aula Magna                | 100       | DISPONIBLE  | AMBOS  
+102          | CANCHA           | Cancha Futbol             | 22        | RESERVADO   | ESTUDIANTE  
+103          | LABORATORIO      | Lab Computacion           | 30        | DISPONIBLE  | PROFESOR  
+104          | AULA             | Aula 101                  | 50        | DISPONIBLE  | ESTUDIANTE  
+105          | CANCHA           | Cancha Basquet            | 10        | DISPONIBLE  | AMBOS  
+106          | LABORATORIO      | Lab Física                | 25        | RESERVADO   | PROFESOR  
+107          | AULA             | Sala de Conferencias      | 150       | DISPONIBLE  | AMBOS  
+108          | CANCHA           | Cancha Tenis              | 4         | RESERVADO   | ESTUDIANTE  
+109          | LABORATORIO      | Lab Quimica               | 20        | DISPONIBLE  | AMBOS  
+110          | AULA             | Aula 202                  | 40        | RESERVADO   | PROFESOR  

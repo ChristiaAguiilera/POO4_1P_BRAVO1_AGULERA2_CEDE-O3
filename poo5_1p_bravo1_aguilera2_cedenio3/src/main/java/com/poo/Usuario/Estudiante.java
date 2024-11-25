@@ -14,12 +14,8 @@ public class Estudiante extends Usuario {
     }
 
     @Override
-    public void reservar(Date fecha) {
-        System.out.println("Reservando como estudiante para la fecha: " + fecha);
-    }
-
-    @Override
-    public void consultarReserva(Date fecha) {
-        System.out.println("Consultando reserva como estudiante para la fecha: " + fecha);
+    public void reservar() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'reservar'");
     }
 }
