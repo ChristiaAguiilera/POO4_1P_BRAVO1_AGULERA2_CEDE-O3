@@ -23,7 +23,9 @@ public abstract class Usuario {
     }
 
     //metodos
-    public abstract void reservar();
+    public void reservar(){
+
+    }
 
     public void consultar_reserva(){
 

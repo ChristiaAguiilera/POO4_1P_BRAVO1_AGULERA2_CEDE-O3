@@ -58,9 +58,5 @@ public class Profesor extends Usuario {
                 "}";
     }
 
-    @Override
-    public void reservar() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'reservar'");
-    }
+   
 }
