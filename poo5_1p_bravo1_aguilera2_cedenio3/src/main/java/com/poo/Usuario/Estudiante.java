@@ -3,7 +3,7 @@ package com.poo.Usuario;
 import java.util.Scanner;
 import java.util.Date;
 import javax.mail.*;
-import io.github.cdismascio.dotenv.*;
+import io.github.cdimascio.dotenv.*;
 import java.util.Properties;
 
 public class Estudiante extends Usuario {
