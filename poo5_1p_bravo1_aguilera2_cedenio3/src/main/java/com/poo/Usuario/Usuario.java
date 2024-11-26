@@ -131,13 +131,12 @@ public abstract class Usuario {
                 } catch (Exception e) {
                     System.out.println(e.getMessage());
                 }
-                
             }else{
                 Sistema.mostrar_menu();
             }
-            
         }else{
             System.out.println("No valido vuelva a intentarlo");
+            Sistema.mostrar_menu();
         }
     }
     
