@@ -20,5 +20,19 @@ public class Estudiante extends Usuario {
         
     }
 
-    
+    public int getNumMatricula(){
+        return numMatricula;
+    }
+
+    public void setNumMatricula(int numMatricula){
+        this.numMatricula = numMatricula;
+    }
+
+    public String Carrera(){
+        return carrera;
+    }
+
+    public void setCarrera(String carrera){
+        this.carrera = carrera;
+    }
 }
