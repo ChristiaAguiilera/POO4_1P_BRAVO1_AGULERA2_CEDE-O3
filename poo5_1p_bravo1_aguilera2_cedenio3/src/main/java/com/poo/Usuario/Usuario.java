@@ -11,6 +11,7 @@ import io.github.cdimascio.dotenv.*;
 import java.util.Properties;
 
 import com.poo.Espacio;
+import com.poo.Sistema;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -87,17 +88,24 @@ public abstract class Usuario {
             }
             System.out.println("Ingrese el nombre de la cancha que desee: ");
             String nombre = sc.nextLine();
-            try {
-                Message mes = new MimeMessage(session);             
-                mes.setFrom(new InternetAddress(user, "Reserva Estudiante")); 
-                mes.setRecipients(Message.RecipientType.TO, InternetAddress.parse(administrador.getCorreo()));
-                mes.setSubject("Reserva realizada");
-                mes.setText("El estudiante"+ getNombre()+ " y " + getApellido() + " ha realizado una reservación con codigo "+ 
-                    getCodigo()+" para la fecha"+ fecha+ " en la cancha" + nombre + ". Ingrese al sistema para aprobar o rechazar." );
-                Transport.send(mes);
-            } catch (Exception e) {
-                System.out.println(e.getMessage());
+            System.out.println("Deseas crear la reserva?");
+            String respuesta = sc.nextLine();
+            if(respuesta.toUpperCase().equals("SI")){
+                try {
+                    Message mes = new MimeMessage(session);             
+                    mes.setFrom(new InternetAddress(user, "Reserva Estudiante")); 
+                    mes.setRecipients(Message.RecipientType.TO, InternetAddress.parse(administrador.getCorreo()));
+                    mes.setSubject("Reserva realizada");
+                    mes.setText("El estudiante"+ getNombre()+ " y " + getApellido() + " ha realizado una reservación con codigo "+ 
+                        getCodigo()+" para la fecha"+ fecha+ " en la cancha" + nombre + ". Ingrese al sistema para aprobar o rechazar." );
+                    Transport.send(mes);
+                } catch (Exception e) {
+                    System.out.println(e.getMessage());
+                }
+            }else{
+                Sistema.mostrar_menu();
             }
+            
             
         }else if(decision.toUpperCase() == "AULA"){
             System.out.println("Las aulas disponibles son las siguientes: ");
@@ -109,16 +117,23 @@ public abstract class Usuario {
             }
             System.out.println("Ingrese el nombre del aula que desee: ");
             String nombre = sc.nextLine();
-            try {
-                Message mes = new MimeMessage(session);             
-                mes.setFrom(new InternetAddress(user, "Reserva Estudiante")); 
-                mes.setRecipients(Message.RecipientType.TO, InternetAddress.parse(administrador.getCorreo()));
-                mes.setSubject("Reserva realizada");
-                mes.setText("El estudiante"+ getNombre()+ " y " + getApellido() + " ha realizado una reservación con codigo "+ 
-                    getCodigo()+" para la fecha"+ fecha+ " en el aula" + nombre + ". Ingrese al sistema para aprobar o rechazar." );
-                Transport.send(mes);
-            } catch (Exception e) {
-                System.out.println(e.getMessage());
+            System.out.println("Deseas crear la reserva?");
+            String respuesta = sc.nextLine();
+            if(respuesta.toUpperCase().equals("SI")){
+                try {
+                    Message mes = new MimeMessage(session);             
+                    mes.setFrom(new InternetAddress(user, "Reserva Estudiante")); 
+                    mes.setRecipients(Message.RecipientType.TO, InternetAddress.parse(administrador.getCorreo()));
+                    mes.setSubject("Reserva realizada");
+                    mes.setText("El estudiante"+ getNombre()+ " y " + getApellido() + " ha realizado una reservación con codigo "+ 
+                        getCodigo()+" para la fecha"+ fecha+ " en el aula" + nombre + ". Ingrese al sistema para aprobar o rechazar." );
+                    Transport.send(mes);
+                } catch (Exception e) {
+                    System.out.println(e.getMessage());
+                }
+                
+            }else{
+                Sistema.mostrar_menu();
             }
             
         }else{
@@ -127,6 +142,7 @@ public abstract class Usuario {
     }
     
     public void enviar_correo(String materia){
+
         
     }
 

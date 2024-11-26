@@ -19,11 +19,11 @@ public class Sistema {
         cargarEspaciosDesdeArchivo("src/main/java/com/poo/Archivos/Espacios.txt");
     }
 
-    public void mostrar_menu(){
+    public static void mostrar_menu(){
 
     }
 
-    public void mostrar_menu_administrador(){
+    public static void mostrar_menu_administrador(){
 
 
     }
