@@ -1,6 +1,12 @@
 package com.poo.Usuario;
 
 import java.util.Date;
+import javax.mail.*;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
+
+import io.github.cdimascio.dotenv.*;
+import java.util.Properties;
 
 public abstract class Usuario {
     private int codigo;
@@ -24,6 +30,9 @@ public abstract class Usuario {
 
     //metodos
     public void reservar(){
+        
+
+        
 
     }
 
