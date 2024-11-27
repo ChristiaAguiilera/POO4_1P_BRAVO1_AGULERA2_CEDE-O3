@@ -1,0 +1,16 @@
+P1A2 | 0901234567 | Juan Carlos | Pérez López | Ingeniería | Física, Matemáticas
+P3B4 | 0902345678 | María Elena | Torres Ruiz | Ciencias Sociales | Sociología, Historia
+P5C6 | 0903456789 | Roberto Andrés | Martínez Gutiérrez | Ingeniería | Programación, Algoritmos
+P7D8 | 0904567890 | Ana Lucía | Vega Salazar | Medicina | Anatomía, Fisiología
+P9E0 | 0905678901 | Luis Miguel | Ortega Fernández | Administración | Contabilidad, Finanzas
+E101 | 0906789012 | Daniela Isabel | Sánchez Ríos | 2024123456 | Ingeniería de Sistemas
+E102 | 0907890123 | José Manuel | Paredes Mora | 2024123457 | Medicina
+E103 | 0908901234 | Andrea Carolina | Ortiz Mejía | 2024123458 | Ciencias Sociales
+E104 | 0909012345 | Miguel Ángel | Cabrera Romero | 2024123459 | Arquitectura
+E105 | 0900123456 | Sofía Beatriz | León Villamar | 2024123460 | Administración de Empresas
+
+
+
+
+
+
