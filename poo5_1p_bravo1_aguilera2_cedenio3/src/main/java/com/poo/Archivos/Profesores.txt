@@ -1,0 +1,5 @@
+1001 | 0901234567 | Juan Carlos | Pérez López | Ingeniería | Física, Matemáticas
+1002 | 0902345678 | María Elena | Torres Ruiz | Ciencias Sociales | Sociología, Historia
+1003 | 0903456789 | Roberto Andrés | Martínez Gutiérrez | Ingeniería | Programación, Algoritmos
+1004 | 0904567890 | Ana Lucía | Vega Salazar | Medicina | Anatomía, Fisiología
+1005 | 0905678901 | Luis Miguel | Ortega Fernández | Administración | Contabilidad, Finanzas

@@ -23,7 +23,7 @@ import java.util.ArrayList;
 
 public abstract class Usuario {
     private int codigo;
-    private int cedula;
+    private String cedula;
     private String nombre;
     private String apellido;
     private String usuario;
@@ -31,9 +31,7 @@ public abstract class Usuario {
     private String correo;
     private String rol;
     private Administrador administrador;
-    private Espacio espacio;
-
-    public Usuario(int codigo, int cedula, String nombre, String apellido, 
+    public Usuario(int codigo,String  cedula, String nombre, String apellido, 
                     String usuario, String contrasena, String correo, String rol){
         this.codigo=codigo;
         this.cedula=cedula;
@@ -105,8 +103,6 @@ public abstract class Usuario {
             }else{
                 Sistema.mostrar_menu();
             }
-            
-            
         }else if(decision.toUpperCase() == "AULA"){
             System.out.println("Las aulas disponibles son las siguientes: ");
             for(int i = 0; i < lineas.size(); i++){
@@ -192,11 +188,11 @@ public abstract class Usuario {
         this.codigo = codigo;
     }
 
-    public int getCedula() {
+    public String getCedula() {
         return cedula;
     }
 
-    public void setCedula(int cedula) {
+    public void setCedula(String cedula) {
         this.cedula = cedula;
     }
 

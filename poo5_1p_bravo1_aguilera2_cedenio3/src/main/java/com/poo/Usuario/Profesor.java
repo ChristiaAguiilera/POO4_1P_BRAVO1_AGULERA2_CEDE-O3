@@ -8,13 +8,12 @@ public class Profesor extends Usuario {
     private ArrayList<String> listaMaterias; // Lista de materias que imparte el profesor
 
     // Constructor
-    public Profesor(int codigo, int cedula, String nombre, String apellido, String usuario, String contrasena, 
+    public Profesor(int codigo, String cedula, String nombre, String apellido, String usuario, String contrasena, 
                     String correo, String rol, String facultad, ArrayList<String> listaMaterias) {
         super(codigo, cedula, nombre, apellido, usuario, contrasena, correo, "PROFESOR"); 
         this.facultad = facultad;
         this.listaMaterias = listaMaterias;
     }
-
     // Getters y Setters
     public String getFacultad() {
         return facultad;
