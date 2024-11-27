@@ -1,4 +1,5 @@
 package com.poo.Usuario;
+import com.poo.Enums.*;
 
 import java.util.ArrayList;
 
@@ -8,12 +9,12 @@ public class Profesor extends Usuario {
     private ArrayList<String> listaMaterias; // Lista de materias que imparte el profesor
 
     // Constructor
-    public Profesor(int codigo, String cedula, String nombre, String apellido, String usuario, String contrasena, 
-                    String correo, String rol, String facultad, ArrayList<String> listaMaterias) {
-        super(codigo, cedula, nombre, apellido, usuario, contrasena, correo, "PROFESOR"); 
+    public Profesor(int codigo, String cedula, String nombre, String apellido, String usuario, String contrasena, String correo, Rol rol, String facultad, ArrayList<String> listaMaterias) {
+        super(codigo, cedula, nombre, apellido, usuario, contrasena, correo, Rol.valueOf("p"));
         this.facultad = facultad;
         this.listaMaterias = listaMaterias;
     }
+
     // Getters y Setters
     public String getFacultad() {
         return facultad;
@@ -41,7 +42,7 @@ public class Profesor extends Usuario {
         }
     }
 
-    public void consultar_reserva() {
+    public void ConsultarReserva() {
         System.out.println("Consultando reservas realizadas por el profesor: " + getNombre());
     }
 
@@ -55,5 +56,4 @@ public class Profesor extends Usuario {
                 "}";
     }
 
-   
 }

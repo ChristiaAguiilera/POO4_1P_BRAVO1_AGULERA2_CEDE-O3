@@ -1,4 +1,3 @@
-Código Único | Tipo de Espacio  | Nombre del Espacio        | Capacidad | Estado      | Rol
 101          |AULA              | Aula Magna                | 100       | DISPONIBLE  | AMBOS  
 102          | CANCHA           | Cancha Futbol             | 22        | RESERVADO   | ESTUDIANTE  
 103          | LABORATORIO      | Lab Computacion           | 30        | DISPONIBLE  | PROFESOR  

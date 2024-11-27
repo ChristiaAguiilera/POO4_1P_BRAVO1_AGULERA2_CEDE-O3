@@ -1,5 +1,5 @@
-2001 | 0906789012 | Daniela Isabel | Sánchez Ríos | 2024123456 | Ingeniería de Sistemas
-2002 | 0907890123 | José Manuel | Paredes Mora | 2024123457 | Medicina
-2003 | 0908901234 | Andrea Carolina | Ortiz Mejía | 2024123458 | Ciencias Sociales
-2004 | 0909012345 | Miguel Ángel | Cabrera Romero | 2024123459 | Arquitectura
-2005 | 0900123456 | Sofía Beatriz | León Villamar | 2024123460 | Administración de Empresas
+2001         | 0906789012 | Daniela Isabel  | Sánchez Ríos   | 2024123456 | Ingeniería de Sistemas
+2002         | 0907890123 | José Manuel     | Paredes Mora   | 2024123457 | Medicina
+2003         | 0908901234 | Andrea Carolina | Ortiz Mejía    | 2024123458 | Ciencias Sociales
+2004         | 0909012345 | Miguel Ángel    | Cabrera Romero | 2024123459 | Arquitectura
+2005         | 0900123456 | Sofía Beatriz   | León Villamar  | 2024123460 | Administración de Empresas

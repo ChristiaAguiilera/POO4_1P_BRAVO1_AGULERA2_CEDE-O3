@@ -17,8 +17,7 @@ public class Reserva {
     private Usuario nombre_user;
     public static int numeroReservas;
 
-    public Reserva(int codigo, Date fecha, String nombre, Estado estado, Tipo tipo_espacio, 
-                                                        Usuario nombre_user, int capacidad){
+    public Reserva(int codigo, Date fecha, String nombre, Estado estado, Tipo tipo_espacio, Usuario nombre_user, int capacidad){
         this.codigo = codigo;
         this.fecha = fecha;
         this.nombre_espacio = nombre;
@@ -36,7 +35,7 @@ public class Reserva {
 
     }
 
-    public void consultar_reserva(Usuario rol){
+    public void ConsultarReserva(Usuario rol){
 
     }
 

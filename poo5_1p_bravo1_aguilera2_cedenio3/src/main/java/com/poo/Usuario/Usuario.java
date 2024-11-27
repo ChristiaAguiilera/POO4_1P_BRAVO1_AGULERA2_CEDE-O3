@@ -12,6 +12,7 @@ import java.util.Properties;
 
 import com.poo.Espacio;
 import com.poo.Sistema;
+import com.poo.Enums.*;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -19,7 +20,6 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
 
 public abstract class Usuario {
     private int codigo;
@@ -29,10 +29,9 @@ public abstract class Usuario {
     private String usuario;
     private String contrasena;
     private String correo;
-    private String rol;
+    private Rol rol;
     private Administrador administrador;
-    public Usuario(int codigo,String  cedula, String nombre, String apellido, 
-                    String usuario, String contrasena, String correo, String rol){
+    public Usuario(int codigo,String  cedula, String nombre, String apellido,String usuario, String contrasena, String correo, Rol rol){
         this.codigo=codigo;
         this.cedula=cedula;
         this.nombre=nombre;
@@ -42,15 +41,29 @@ public abstract class Usuario {
     }
 
     //metodos
-    public void reservar(){
+    public void reservar(Date date){
+        System.out.println("Elija un espacio: \n AULAS (A) o CANCHAS(C)");
+        Tipo tipo;
+        String t = Sistema.sc.nextLine().strip().toLowerCase();
+        if (t.equals("c")){
+            tipo=Tipo.CANCHA;
+        }else if(t.equals("a")){
+            tipo=Tipo.AULA;
+        }else{
+            System.out.println("Input invalido.");
+        }
+
+        for(Espacio e: Sistema.listaEspacio){
+            System.out.println(e.toString());
+        }
     }
 
-    public void consultar_reserva(){
+    public void ConsultarReserva(){
 
     }
 
     public void enviar_correo(Date fecha){
-        Dotenv dot = Dotenv.load(); 
+        Dotenv dot = Dotenv.load();
         String host = dot.get("MAIL_HOST");
         String port = dot.get("MAIL_PORT");
         String user = dot.get("MAIL_USER");
@@ -90,7 +103,7 @@ public abstract class Usuario {
             String respuesta = sc.nextLine();
             if(respuesta.toUpperCase().equals("SI")){
                 try {
-                    Message mes = new MimeMessage(session);             
+                    Message mes = new MimeMessage(session);
                     mes.setFrom(new InternetAddress(user, "Reserva Estudiante")); 
                     mes.setRecipients(Message.RecipientType.TO, InternetAddress.parse(administrador.getCorreo()));
                     mes.setSubject("Reserva realizada");
@@ -166,7 +179,7 @@ public abstract class Usuario {
             e.printStackTrace();
         } finally {
             // En el finally cerramos el fichero, para asegurarnos
-            // que se cierra tanto si todo va bien como si salta 
+            // que se cierra tanto si todo va bien como si salta
             // una excepcion.
             try {
                 if (null != fr) {
@@ -228,14 +241,16 @@ public abstract class Usuario {
         this.correo = correo;
     }
 
-    public String getRol() {
+    public Rol getRol() {
         return rol;
     }
 
-    public void setRol(String rol) {
+    public void setRol(Rol rol) {
         this.rol = rol;
     }
 
-    
+    public String getUsuario(){
+        return this.usuario;
+    }
 
 }
