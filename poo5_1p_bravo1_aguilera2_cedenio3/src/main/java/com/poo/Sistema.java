@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-import com.poo.Enums.Estado;
+import com.poo.Enums.*;
 import com.poo.Enums.Tipo;
 import com.poo.Usuario.Usuario;
 
@@ -43,10 +43,10 @@ public class Sistema {
                 String nombre = datos[2].trim();
                 int capacidad = Integer.parseInt(datos[3].trim());
                 Estado estado = Estado.valueOf(datos[4].trim());
-                String permiso = datos[5].trim();
+                Rol rol = Rol.valueOf(datos[5].trim());
 
                 // Crear y agregar espacio a la lista
-                Espacio espacio = new Espacio(codigo, tipo, nombre, capacidad, estado, permiso);
+                Espacio espacio = new Espacio(codigo, tipo, nombre, capacidad, estado, rol);
                 listaEspacio.add(espacio);
             }
             System.out.println("Espacios cargados exitosamente desde el archivo.");
@@ -65,7 +65,7 @@ public class Sistema {
                                    ", Tipo: " + espacio.getTipo() +
                                    ", Nombre: " + espacio.getNombre() +
                                    ", Capacidad: " + espacio.getCapacidad() +
-                                   ", Permiso: " + espacio.getPermiso());
+                                   ", Rol: " + espacio.getRol());
                 hayDisponibles = true;
             }
         }
