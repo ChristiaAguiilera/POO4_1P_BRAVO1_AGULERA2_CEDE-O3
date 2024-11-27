@@ -3,6 +3,7 @@ import java.io.*;
 import java.util.ArrayList;
 
 import com.poo.Enums.Estado;
+import com.poo.Enums.Rol;
 import com.poo.Enums.Tipo;
 
 public class Espacio {
@@ -12,16 +13,16 @@ public class Espacio {
     private String nombre;
     private int capacidad;
     private Estado estado;
-    private String permiso;
+    private Rol Rol;
 
     // Constructor
-    public Espacio(int codigo, Tipo tipo, String nombre, int capacidad, Estado estado, String permiso) {
+    public Espacio(int codigo, Tipo tipo, String nombre, int capacidad, Estado estado, Rol rol) {
         this.codigo = codigo;
         this.tipo = tipo;
         this.nombre = nombre;
         this.capacidad = capacidad;
         this.estado = estado;
-        this.permiso = permiso;
+        this.Rol = rol;
     }
 
     // Método para cargar los espacios desde un archivo
@@ -52,14 +53,14 @@ public class Espacio {
         return estado;
     }
 
-    public String getPermiso() {
-        return permiso;
+    public Rol getRol() {
+        return Rol;
     }
 
     @Override
     public String toString() {
         return "Espacio [codigo=" + codigo + ", tipo=" + tipo + ", nombre=" + nombre + ", capacidad=" + capacidad
-                + ", estado=" + estado + ", permiso=" + permiso + "]";
+                + ", estado=" + estado + ", permiso=" +Rol+ "]";
     }
 }
 

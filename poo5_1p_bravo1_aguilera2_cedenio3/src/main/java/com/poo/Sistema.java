@@ -45,8 +45,8 @@ public class Sistema {
                 Estado estado = Estado.valueOf(datos[4].trim());
                 Rol rol = Rol.valueOf(datos[5].trim());
                 // Crear y agregar espacio a la lista
-              //  Espacio espacio = new Espacio(codigo, tipo, nombre, capacidad, estado, rol);
-               // listaEspacio.add(espacio);
+              Espacio espacio = new Espacio(codigo, tipo, nombre, capacidad, estado, rol);
+              listaEspacio.add(espacio);
             }
             System.out.println("Espacios cargados exitosamente desde el archivo.");
         } catch (IOException e) {
@@ -68,7 +68,6 @@ public class Sistema {
                 hayDisponibles = true;
             }
         }
-
         if (!hayDisponibles) {
             System.out.println("No hay espacios disponibles en este momento.");
         }
@@ -79,15 +78,8 @@ public class Sistema {
             String linea;
             while ((linea = br.readLine()) != null) {
                 String[] datos = linea.split("\\|");
-                String codigo = datos[0].trim();
-
-                if(codigo.charAt(0)=='E'){
-                Tipo tipo = Tipo.valueOf(datos[1].trim());
-                String nombre = datos[2].trim();
-                int capacidad = Integer.parseInt(datos[3].trim());
-                Estado estado = Estado.valueOf(datos[4].trim());
-                String permiso = datos[5].trim();
-                }
+                int codigo = Integer.parseInt(datos[0].trim());
+                String cedula=datos[0].trim();
             }
 
     }catch(IOException e){
