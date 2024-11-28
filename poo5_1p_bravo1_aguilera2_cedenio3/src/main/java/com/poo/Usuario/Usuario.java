@@ -37,25 +37,15 @@ public abstract class Usuario {
     private String correo;
     private Rol rol;
     private Administrador administrador;
-
-<<<<<<< HEAD
-    public Usuario(int codigo,String  cedula, String nombre, String apellido,String usuario, String contrasena, String correo, Rol rol){
-
-        this.codigo=codigo;
-        this.cedula=cedula;
-        this.nombre=nombre;
-        this.apellido=apellido;
-        this.contrasena=contrasena;
-=======
+    
     // Constructor
-    public Usuario(int codigo, String cedula, String nombre, String apellido, String usuario, String contrasena,
-            String correo, Rol rol) {
+    public Usuario(int codigo, String cedula, String nombre, String apellido, String usuario, String contrasena,String correo, Rol rol) {
         this.codigo = codigo;
         this.cedula = cedula;
         this.nombre = nombre;
         this.apellido = apellido;
         this.contrasena = contrasena;
->>>>>>> 16679df4db71ede229d0fa4c604275e77957748e
+
         this.usuario = usuario;
     }
 

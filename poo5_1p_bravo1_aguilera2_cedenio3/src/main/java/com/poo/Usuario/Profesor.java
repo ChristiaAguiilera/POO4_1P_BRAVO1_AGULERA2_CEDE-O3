@@ -6,8 +6,6 @@ import com.poo.Enums.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import com.poo.Enums.Rol;
-
 public class Profesor extends Usuario {
     // Atributos específicos
     private String facultad;

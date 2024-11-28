@@ -14,6 +14,7 @@ import java.util.Scanner;
 
 import com.poo.Enums.*;
 <<<<<<< HEAD
+<<<<<<< HEAD
 import com.poo.Enums.Tipo;
 import com.poo.Usuario.Usuario;
 
@@ -39,6 +40,19 @@ public class Sistema {
     private ArrayList<Reserva> listaReserva;
     static Usuario usuario;
 
+=======
+import com.poo.Usuario.*;
+
+public class Sistema {
+
+    public static Scanner sc = new Scanner(System.in);
+    private static ArrayList<Usuario> listaUsuario;
+    private static ArrayList<Usuario> listaAdministradores;
+    public static ArrayList<Espacio> listaEspacio = new ArrayList<>();
+    private ArrayList<Reserva> listaReserva;
+    static Usuario usuario;
+
+>>>>>>> 16679df4db71ede229d0fa4c604275e77957748e
     public static void main(String[] args) {
 
         cargarEspaciosDesdeArchivo("Espacios.txt");
@@ -47,6 +61,9 @@ public class Sistema {
         actualizarEstudiantes();
         actualizarProfesores();
 
+<<<<<<< HEAD
+>>>>>>> 16679df4db71ede229d0fa4c604275e77957748e
+=======
 >>>>>>> 16679df4db71ede229d0fa4c604275e77957748e
         System.out.println("Bienvendio al sistema , Ingrese su usario y contraseña: ");
         System.out.println("Usuario: ");
@@ -243,6 +260,7 @@ public class Sistema {
         System.out.println("---------------------------------");
     }
 <<<<<<< HEAD
+<<<<<<< HEAD
     public static void CargarUsuarios(String Archivo){
         try (BufferedReader br = new BufferedReader(new FileReader(Archivo))) {
             String linea;
@@ -261,3 +279,7 @@ public class Sistema {
 
 >>>>>>> 16679df4db71ede229d0fa4c604275e77957748e
 }
+=======
+
+}
+>>>>>>> 16679df4db71ede229d0fa4c604275e77957748e

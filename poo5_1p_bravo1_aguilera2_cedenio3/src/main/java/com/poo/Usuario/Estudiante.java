@@ -8,8 +8,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Scanner;
 
-import com.poo.Enums.Rol;
-
 public class Estudiante extends Usuario {
     private int numMatricula;
     private String carrera;
