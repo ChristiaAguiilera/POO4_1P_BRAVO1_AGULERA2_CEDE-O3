@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Scanner;
 
+// Se importan paquetes para poder enviar el correo
 import javax.mail.*;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
@@ -32,6 +33,7 @@ public abstract class Usuario {
     private Rol rol;
     private Administrador administrador;
 
+    // Constructor
     public Usuario(int codigo, String cedula, String nombre, String apellido, String usuario, String contrasena,
             String correo, Rol rol) {
         this.codigo = codigo;
@@ -50,7 +52,7 @@ public abstract class Usuario {
     public void ConsultarReserva() {
 
     }
-
+    // Metodo de enviar correo para estudiantes
     public void enviar_correo(Date fecha, String nombre, String desicion) {
         // Se instancia el dotenv lo que sirve para poder enviar el correo
         Dotenv dot = Dotenv.load();
@@ -108,7 +110,7 @@ public abstract class Usuario {
         }
 
     }
-
+    // Metodo enviar correo para profesores
     public void enviar_correo(String materia, String nombre, String decision) {
         Dotenv dot = Dotenv.load();
         String host = dot.get("MAIL_HOST");
@@ -179,6 +181,7 @@ public abstract class Usuario {
         }
     }
 
+    //Metodo para leer archivos
     public static ArrayList<String> LeeFichero(String nombrearchivo) {
         ArrayList<String> lineas = new ArrayList<>();
         File archivo = null;

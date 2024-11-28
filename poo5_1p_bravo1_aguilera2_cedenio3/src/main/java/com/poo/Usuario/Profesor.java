@@ -126,6 +126,7 @@ public class Profesor extends Usuario {
             }
 
         } else {
+            // Si no inserta un tipo valido se le muestra el menu nuevamente
             System.out.println("No valido vuelva a intentarlo");
             Sistema.mostrar_menu();
         }

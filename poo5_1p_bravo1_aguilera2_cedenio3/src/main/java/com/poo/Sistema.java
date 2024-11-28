@@ -58,7 +58,7 @@ public class Sistema {
 
             switch (opcion) {
                 case 1:
-                    usuario.reservar(new Date());
+                    usuario.reservar();
                     break;
                 case 2:
                     usuario.ConsultarReserva();
