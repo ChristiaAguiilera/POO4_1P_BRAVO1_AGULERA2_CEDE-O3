@@ -20,6 +20,9 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 
 public abstract class Usuario {
@@ -52,6 +55,7 @@ public abstract class Usuario {
     public void ConsultarReserva() {
 
     }
+
     // Metodo de enviar correo para estudiantes
     public void enviar_correo(Date fecha, String nombre, String desicion) {
         // Se instancia el dotenv lo que sirve para poder enviar el correo
@@ -110,6 +114,7 @@ public abstract class Usuario {
         }
 
     }
+
     // Metodo enviar correo para profesores
     public void enviar_correo(String materia, String nombre, String decision) {
         Dotenv dot = Dotenv.load();
@@ -181,39 +186,41 @@ public abstract class Usuario {
         }
     }
 
-    //Metodo para leer archivos
-    public static ArrayList<String> LeeFichero(String nombrearchivo) {
+    // Metodo para leer archivos
+    public static ArrayList<String> LeeFichero(String nombreArchivo) {
         ArrayList<String> lineas = new ArrayList<>();
-        File archivo = null;
-        FileReader fr = null;
+        InputStream inputStream = null;
         BufferedReader br = null;
-
+        
         try {
-            // Apertura del fichero y creacion de BufferedReader para poder
-            // hacer una lectura comoda (disponer del metodo readLine()).
-            archivo = new File(nombrearchivo);
-            fr = new FileReader(archivo, StandardCharsets.UTF_8);
-            br = new BufferedReader(fr);
+            // Usamos ClassLoader para cargar el archivo desde resources
+            inputStream = Usuario.class.getClassLoader().getResourceAsStream("Archivos/" + nombreArchivo);
+
+            // Se verfica si se cargo
+            if (inputStream == null) {
+                System.out.println("El archivo no se encontró en el classpath");
+                return lineas; 
+            }
+
+            // Creamos el BufferedReader para leer el archivo
+            br = new BufferedReader(new InputStreamReader(inputStream, StandardCharsets.UTF_8));
 
             // Lectura del fichero
             String linea;
             while ((linea = br.readLine()) != null) {
                 System.out.println(linea);
                 lineas.add(linea);
-
             }
 
-        } catch (Exception e) {
+        } catch (IOException e) {
             e.printStackTrace();
         } finally {
-            // En el finally cerramos el fichero, para asegurarnos
-            // que se cierra tanto si todo va bien como si salta
-            // una excepcion.
+            // Aseguramos el cierre del BufferedReader
             try {
-                if (null != fr) {
-                    fr.close();
+                if (br != null) {
+                    br.close();
                 }
-            } catch (Exception e2) {
+            } catch (IOException e2) {
                 e2.printStackTrace();
             }
         }
