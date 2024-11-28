@@ -44,7 +44,6 @@ public class Profesor extends Usuario {
                     System.out.println(profe[5]);
                     break; // Se utiliza para que no siga corriendo el for
                 }
-                break; // Se utiliza para que no siga corriendo el for
             }
             System.out.println("Para cual materia es la reserva?");
             String asignatura = sc.nextLine();
@@ -76,7 +75,7 @@ public class Profesor extends Usuario {
                     System.out.println(profe[5]);
                     break; // Se utiliza para que no siga corriendo el for
                 }
-                break; // Se utiliza para que no siga corriendo el for
+
             }
             System.out.println("Para cual materia es la reserva?");
             String asignatura = sc.nextLine();
@@ -109,7 +108,6 @@ public class Profesor extends Usuario {
                     System.out.println(profe[5]);
                     break; // Se utiliza para que no siga corriendo el for
                 }
-                break; // Se utiliza para que no siga corriendo el for
             }
             System.out.println("Para cual materia es la reserva?");
             String asignatura = sc.nextLine();
