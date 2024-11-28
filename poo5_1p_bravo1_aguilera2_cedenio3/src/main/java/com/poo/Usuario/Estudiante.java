@@ -16,10 +16,10 @@ public class Estudiante extends Usuario {
 
     public Estudiante(int codigo, String cedula, String nombre, String apellido, String usuario, String contrasena,
             String correo, Rol rol, int numMatricula, String carrera) {
-        super(codigo, cedula, nombre, apellido, usuario, contrasena, correo, Rol.valueOf("E"));
+        super(codigo, cedula, nombre, apellido, usuario, contrasena, correo, Rol.valueOf("ESTUDIANTE"));
 
         this.numMatricula = numMatricula;
-        this.carrera = carrera;
+        this.carrera = carrera; 
 
     }
 

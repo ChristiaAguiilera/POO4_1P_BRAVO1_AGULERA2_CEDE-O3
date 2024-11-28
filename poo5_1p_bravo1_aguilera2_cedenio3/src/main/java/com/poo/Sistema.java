@@ -22,8 +22,8 @@ public class Sistema {
 
     //Se crean objetos estaticos para listas de reservas, usuarios, espacios u administradores
     public static Scanner sc = new Scanner(System.in);
-    private static ArrayList<Usuario> listaUsuario;
-    private static ArrayList<Usuario> listaAdministradores;
+    private static ArrayList<Usuario> listaUsuario=new ArrayList<>();
+    private static ArrayList<Usuario> listaAdministradores= new ArrayList<>();
     public static ArrayList<Espacio> listaEspacio = new ArrayList<>();
     public static ArrayList<Reserva> listaReserva;
     static Usuario usuario;
@@ -31,9 +31,9 @@ public class Sistema {
     public static void main(String[] args) {
 
         //Se llaman metodos para poder cargar las listas de objetos
-        cargarEspaciosDesdeArchivo("resources/Archivos/Espacios.txt"); //Encontrar rutas
-        CargarAdministradoresDesdeArchivo("Administradores.txt");
         CargarUsuariosDesdeArchivo("Usuarios.txt");
+        cargarEspaciosDesdeArchivo("Espacios.txt"); //Encontrar rutas
+        CargarAdministradoresDesdeArchivo("Administradores.txt");
         actualizarEstudiantes();
         actualizarProfesores();
 
@@ -45,8 +45,10 @@ public class Sistema {
         String contraseña = sc.nextLine();
         //Se recorre la lista para poder encontrar al usuario que se esta intentado entrar
         for (Usuario u : listaUsuario) {
-            if (usuario.equals(u.getUsuario()) && contraseña.equals(u.getContrasena()))
+            if (usuario.equals(u.getUsuario()) && contraseña.equals(u.getContrasena())){
                 Sistema.usuario = u;
+                System.out.println("Bienvenidoo al sistema");
+            }
         }
     }
 
@@ -102,7 +104,6 @@ public class Sistema {
     public static void cargarEspaciosDesdeArchivo(String nombreArchivo) {
         try (InputStream inputStream = Sistema.class.getClassLoader().getResourceAsStream("Archivos/" + nombreArchivo);
                 BufferedReader br = new BufferedReader(new InputStreamReader(inputStream))) {
-
             if (inputStream == null) {
                 System.out.println("El archivo no fue encontrado.");
                 return;
@@ -177,6 +178,7 @@ public class Sistema {
                 listaAdministradores.add(new Administrador(codigo, cedula, nombre, apellido, "", "", "",
                         Rol.ADMINISTRADOR, Cargo.valueOf(cargo)));
             }
+            System.out.println("Administradores cargados");
 
         } catch (IOException e) {
             System.out.println("Error al leer el archivo: " + e.getMessage());
@@ -186,51 +188,51 @@ public class Sistema {
     }
     //Actualiza campos de los estudiantes dependiendo de sus campos respectivos
     public static void actualizarEstudiantes() {
-        try (BufferedReader br = new BufferedReader(new FileReader("src/main/java/com/poo/Archivos/Estudiante.txt"))) {
+        try (BufferedReader br = new BufferedReader(new FileReader("src/main/resources/Archivos/Estudiante.txt"))) {
             String linea;
             while ((linea = br.readLine()) != null) {
-                int codigo = Integer.parseInt(linea.split("\\|")[0]);
+                String[] datos = linea.split("\\|");
+                int codigo = Integer.parseInt(datos[0].trim());
                 for (Usuario u : listaUsuario) {
                     if (codigo == u.getCodigo()) {
-                        //Saca al usuario de la lista, crea uno nuevo y actualiza sus datos
-                        listaUsuario.remove(u);
-                        Estudiante temp = (Estudiante) u;
-                        temp.setNumMatricula(Integer.valueOf(linea.split("\\|")[4]));
-                        temp.setCarrera(linea.split("\\|")[5]);
-                        listaUsuario.add(temp);
+                        //Sse hace downcasting y se actualiza los datos
+                        Estudiante e= (Estudiante) u;
+                        e.setNumMatricula(Integer.valueOf(datos[4].trim()));
+                        e.setCarrera(datos[5].trim());
                     }
                 }
 
             }
         } catch (Exception e) {
-            System.out.println("Error");
+            System.out.println("Error: ");
+            e.printStackTrace();
         }
     }
 
 
     //Lee el archivo de profesores
     public static void actualizarProfesores() {
-        try (BufferedReader br = new BufferedReader(new FileReader("src/main/java/com/poo/Archivos/Estudiante.txt"))) {
+        try (BufferedReader br = new BufferedReader(new FileReader("src/main/resources/Archivos/Profesores.txt"))) {
             String linea;
             //Itera cada profesor
             while ((linea = br.readLine()) != null) {
-                int codigo = Integer.parseInt(linea.split("\\|")[0]);
+                String[] datos = linea.split("\\|");
+                int codigo = Integer.parseInt(datos[0].trim());
                 for (Usuario u : listaUsuario) {
                     if (codigo == u.getCodigo()) {
-                        //Obtiene a cada profesor, lo remueve, atualiza sus datos y lo guarda.
-                        listaUsuario.remove(u);
+                        //Se hace dowcasting y se actualiza lois datos del profesor
                         Profesor temp = (Profesor) u;
-                        temp.setFacultad(linea.split("\\|")[4]);
-                        String[] amaterias = linea.split("\\|")[5].split(",");
+                        temp.setFacultad(datos[4].trim());
+                        String[] amaterias = datos[5].trim().split(",");
                         ArrayList<String> materias = new ArrayList<>(Arrays.asList(amaterias));
                         temp.setListaMaterias(materias);
-                        listaUsuario.add(temp);
                     }
                 }
 
             }
         } catch (Exception e) {
             System.out.println("Error");
+            e.printStackTrace();
         }
     }
 

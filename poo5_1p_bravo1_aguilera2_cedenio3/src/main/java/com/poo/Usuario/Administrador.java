@@ -7,7 +7,7 @@ public class Administrador extends Usuario{
     private Cargo cargo;
 
     public Administrador(int codigo, String cedula, String nombre, String apellido, String usuario, String contrasena, String correo, Rol rol, Cargo cargo){
-        super(codigo, cedula, nombre, apellido, usuario, contrasena, correo, Rol.valueOf("A"));
+        super(codigo, cedula, nombre, apellido, usuario, contrasena, correo, Rol.valueOf("ADMINISTRADOR"));
 
         this.cargo = cargo;
     }

@@ -16,7 +16,7 @@ public class Profesor extends Usuario {
     // Constructor
     public Profesor(int codigo, String cedula, String nombre, String apellido, String usuario, String contrasena,
             String correo, Rol rol, String facultad, ArrayList<String> listaMaterias) {
-        super(codigo, cedula, nombre, apellido, usuario, contrasena, correo, Rol.valueOf("p"));
+        super(codigo, cedula, nombre, apellido, usuario, contrasena, correo, Rol.valueOf("PROFESOR"));
 
         this.facultad = facultad;
         this.listaMaterias = listaMaterias;
