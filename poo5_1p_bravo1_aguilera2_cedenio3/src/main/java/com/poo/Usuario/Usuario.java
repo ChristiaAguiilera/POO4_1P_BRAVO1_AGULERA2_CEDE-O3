@@ -31,38 +31,28 @@ public abstract class Usuario {
     private String correo;
     private Rol rol;
     private Administrador administrador;
-    public Usuario(int codigo,String  cedula, String nombre, String apellido,String usuario, String contrasena, String correo, Rol rol){
-        this.codigo=codigo;
-        this.cedula=cedula;
-        this.nombre=nombre;
-        this.apellido=apellido;
-        this.contrasena=contrasena;
+
+    public Usuario(int codigo, String cedula, String nombre, String apellido, String usuario, String contrasena,
+            String correo, Rol rol) {
+        this.codigo = codigo;
+        this.cedula = cedula;
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.contrasena = contrasena;
         this.usuario = usuario;
     }
 
-    //metodos
-    public void reservar(Date date){
-        System.out.println("Elija un espacio: \n AULAS (A) o CANCHAS(C)");
-        Tipo tipo;
-        String t = Sistema.sc.nextLine().strip().toLowerCase();
-        if (t.equals("c")){
-            tipo=Tipo.CANCHA;
-        }else if(t.equals("a")){
-            tipo=Tipo.AULA;
-        }else{
-            System.out.println("Input invalido.");
-        }
-
-        for(Espacio e: Sistema.listaEspacio){
-            System.out.println(e.toString());
-        }
-    }
-
-    public void ConsultarReserva(){
+    // metodos
+    public void reservar() {
 
     }
 
-    public void enviar_correo(Date fecha){
+    public void ConsultarReserva() {
+
+    }
+
+    public void enviar_correo(Date fecha, String nombre, String desicion) {
+        // Se instancia el dotenv lo que sirve para poder enviar el correo
         Dotenv dot = Dotenv.load();
         String host = dot.get("MAIL_HOST");
         String port = dot.get("MAIL_PORT");
@@ -76,82 +66,117 @@ public abstract class Usuario {
         prop.put("mail.smtp.starttls.enable", true); // Usar STARTTLS
         prop.put("mail.smtp.ssl.trust", host); // Confiar en el host
         prop.put("mail.smtp.ssl.protocols", "TLSv1.2"); // Forzar TLSv1.2
-        
+
         // Crear sesión
         Session session = Session.getInstance(prop, new Authenticator() {
-            protected PasswordAuthentication getPasswordAuthentication(){
+            protected PasswordAuthentication getPasswordAuthentication() {
+                return new PasswordAuthentication(user, pass);
+            }
+        });
+        // Se verifica si son canchas o aulas
+        if (desicion.toUpperCase() == "CANCHA") {
+            // Se envia el correo al administrador
+            try {
+                Message mes = new MimeMessage(session);
+                mes.setFrom(new InternetAddress(user, "Reserva Estudiante"));
+                mes.setRecipients(Message.RecipientType.TO, InternetAddress.parse(administrador.getCorreo()));
+                mes.setSubject("Reserva realizada");
+                mes.setText("El estudiante" + getNombre() + " y " + getApellido()
+                        + " ha realizado una reservación con codigo " +
+                        getCodigo() + " para la fecha" + fecha + " en la cancha" + nombre
+                        + ". Ingrese al sistema para aprobar o rechazar.");
+                Transport.send(mes);
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
+
+        } else if (desicion.toUpperCase() == "AULA") {
+            // Se envia el correo al administrador
+            try {
+                Message mes = new MimeMessage(session);
+                mes.setFrom(new InternetAddress(user, "Reserva Estudiante"));
+                mes.setRecipients(Message.RecipientType.TO, InternetAddress.parse(administrador.getCorreo()));
+                mes.setSubject("Reserva realizada");
+                mes.setText("El estudiante" + getNombre() + " y " + getApellido()
+                        + " ha realizado una reservación con codigo " +
+                        getCodigo() + " para la fecha" + fecha + " en el aula" + nombre
+                        + ". Ingrese al sistema para aprobar o rechazar.");
+                Transport.send(mes);
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
+        }
+
+    }
+
+    public void enviar_correo(String materia, String nombre, String decision) {
+        Dotenv dot = Dotenv.load();
+        String host = dot.get("MAIL_HOST");
+        String port = dot.get("MAIL_PORT");
+        String user = dot.get("MAIL_USER");
+        String pass = dot.get("MAIL_PASS");
+
+        Properties prop = new Properties();
+        prop.put("mail.smtp.host", host);
+        prop.put("mail.smtp.port", port);
+        prop.put("mail.smtp.auth", true);
+        prop.put("mail.smtp.starttls.enable", true); // Usar STARTTLS
+        prop.put("mail.smtp.ssl.trust", host); // Confiar en el host
+        prop.put("mail.smtp.ssl.protocols", "TLSv1.2"); // Forzar TLSv1.2
+
+        // Crear sesión
+        Session session = Session.getInstance(prop, new Authenticator() {
+            protected PasswordAuthentication getPasswordAuthentication() {
                 return new PasswordAuthentication(user, pass);
             }
         });
 
-        Scanner sc = new Scanner(System.in);
-        System.out.println("Deseas reservar una cancha o un aula?");
-        String decision = sc.nextLine();
-        ArrayList<String> lineas = LeeFichero("Espacio.txt");
-        
-        if (decision.toUpperCase() == "CANCHA"){
-            System.out.println("Las canchas disponibles son las siguientes: ");
-            for(int i = 0; i < lineas.size(); i++){
-                String[] palabras = lineas.get(i).split("|");
-                if(palabras[4] != "RESERVADO" & palabras[1] == "CANCHA"){
-                  System.out.println(palabras[2]+" - "+palabras[3]);
-                }
+        // Se verifica que tipo de espacio elegio
+        if (decision.toUpperCase() == "AULA") {
+            // Se envia el correo al administrador
+            try {
+                Message mes = new MimeMessage(session);
+                mes.setFrom(new InternetAddress(user, "Reserva Profesor"));
+                mes.setRecipients(Message.RecipientType.TO, InternetAddress.parse(administrador.getCorreo()));
+                mes.setSubject("Reserva realizada");
+                mes.setText("Se le notifica que el profesor " + getNombre() + " y " + getApellido()
+                        + " ha realizado una reserva con código" + getCodigo() + " en el aula " + nombre
+                        + " para la materia " + materia);
+                Transport.send(mes);
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
             }
-            System.out.println("Ingrese el nombre de la cancha que desee: ");
-            String nombre = sc.nextLine();
-            System.out.println("Deseas crear la reserva?");
-            String respuesta = sc.nextLine();
-            if(respuesta.toUpperCase().equals("SI")){
-                try {
-                    Message mes = new MimeMessage(session);
-                    mes.setFrom(new InternetAddress(user, "Reserva Estudiante")); 
-                    mes.setRecipients(Message.RecipientType.TO, InternetAddress.parse(administrador.getCorreo()));
-                    mes.setSubject("Reserva realizada");
-                    mes.setText("El estudiante"+ getNombre()+ " y " + getApellido() + " ha realizado una reservación con codigo "+ 
-                        getCodigo()+" para la fecha"+ fecha+ " en la cancha" + nombre + ". Ingrese al sistema para aprobar o rechazar." );
-                    Transport.send(mes);
-                } catch (Exception e) {
-                    System.out.println(e.getMessage());
-                }
-            }else{
-                Sistema.mostrar_menu();
-            }
-        }else if(decision.toUpperCase() == "AULA"){
-            System.out.println("Las aulas disponibles son las siguientes: ");
-            for(int i = 0; i < lineas.size(); i++){
-                String[] palabras = lineas.get(i).split("|");
-                if(palabras[4] != "RESERVADO" & palabras[1] == "AULA"){
-                  System.out.println(palabras[2]+" - "+palabras[3]);
-                }
-            }
-            System.out.println("Ingrese el nombre del aula que desee: ");
-            String nombre = sc.nextLine();
-            System.out.println("Deseas crear la reserva?");
-            String respuesta = sc.nextLine();
-            if(respuesta.toUpperCase().equals("SI")){
-                try {
-                    Message mes = new MimeMessage(session);             
-                    mes.setFrom(new InternetAddress(user, "Reserva Estudiante")); 
-                    mes.setRecipients(Message.RecipientType.TO, InternetAddress.parse(administrador.getCorreo()));
-                    mes.setSubject("Reserva realizada");
-                    mes.setText("El estudiante"+ getNombre()+ " y " + getApellido() + " ha realizado una reservación con codigo "+ 
-                        getCodigo()+" para la fecha"+ fecha+ " en el aula" + nombre + ". Ingrese al sistema para aprobar o rechazar." );
-                    Transport.send(mes);
-                } catch (Exception e) {
-                    System.out.println(e.getMessage());
-                }
-            }else{
-                Sistema.mostrar_menu();
-            }
-        }else{
-            System.out.println("No valido vuelva a intentarlo");
-            Sistema.mostrar_menu();
-        }
-    }
-    
-    public void enviar_correo(String materia){
 
-        
+        } else if (decision.toUpperCase() == "LABORATORIO") {
+            // Se envia el correo al administrador
+            try {
+                Message mes = new MimeMessage(session);
+                mes.setFrom(new InternetAddress(user, "Reserva Profesor"));
+                mes.setRecipients(Message.RecipientType.TO, InternetAddress.parse(administrador.getCorreo()));
+                mes.setSubject("Reserva realizada");
+                mes.setText("Se le notifica que el profesor " + getNombre() + " y " + getApellido()
+                        + " ha realizado una reserva con código" + getCodigo() + " en el laboratorio " + nombre
+                        + " para la materia " + materia);
+                Transport.send(mes);
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
+
+        } else if (decision.toUpperCase() == "AUDITORIO") {
+            // Se envia el correo al administrador
+            try {
+                Message mes = new MimeMessage(session);
+                mes.setFrom(new InternetAddress(user, "Reserva Profesor"));
+                mes.setRecipients(Message.RecipientType.TO, InternetAddress.parse(administrador.getCorreo()));
+                mes.setSubject("Reserva realizada");
+                mes.setText("Se le notifica que el profesor " + getNombre() + " y " + getApellido()
+                        + " ha realizado una reserva con código" + getCodigo() + " en el auditorio " + nombre
+                        + " para la materia " + materia);
+                Transport.send(mes);
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
+        }
     }
 
     public static ArrayList<String> LeeFichero(String nombrearchivo) {
@@ -164,7 +189,7 @@ public abstract class Usuario {
             // Apertura del fichero y creacion de BufferedReader para poder
             // hacer una lectura comoda (disponer del metodo readLine()).
             archivo = new File(nombrearchivo);
-            fr = new FileReader(archivo,StandardCharsets.UTF_8);
+            fr = new FileReader(archivo, StandardCharsets.UTF_8);
             br = new BufferedReader(fr);
 
             // Lectura del fichero
@@ -249,7 +274,7 @@ public abstract class Usuario {
         this.rol = rol;
     }
 
-    public String getUsuario(){
+    public String getUsuario() {
         return this.usuario;
     }
 

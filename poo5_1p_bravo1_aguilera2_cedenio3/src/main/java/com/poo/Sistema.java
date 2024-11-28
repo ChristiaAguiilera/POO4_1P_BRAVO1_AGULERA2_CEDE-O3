@@ -194,7 +194,7 @@ public class Sistema {
         }
     }
 
-    public  void mostrar_espacios_disponibles() {
+    public void mostrar_espacios_disponibles() {
         System.out.println("----- Espacios Disponibles -----");
         boolean hayDisponibles = false;
         for (Espacio espacio : listaEspacio) {
