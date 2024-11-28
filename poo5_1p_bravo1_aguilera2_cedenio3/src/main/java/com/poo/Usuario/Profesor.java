@@ -25,10 +25,10 @@ public class Profesor extends Usuario {
     // Métodos específicos
     public void reservar(String materia) {
         Scanner sc = new Scanner(System.in);
-        System.out.println("Deseas reservar un laboratorio, aula o auditorio?");
+        System.out.println("Deseas reservar un laboratorio, aula o auditorio?"); //SOlicita input para tipo de espacio
         String decision = sc.nextLine();
-        ArrayList<String> lineas = LeeFichero("Espacio.txt");
-        ArrayList<String> profesores = LeeFichero("Profesores.txt");
+        ArrayList<String> lineas = LeeFichero("Espacio.txt"); //carga los espacios
+        ArrayList<String> profesores = LeeFichero("Profesores.txt"); //carga los profesores
 
         if (decision.toUpperCase() == "AULA") {
             System.out.println("Las aulas disponibles son las siguientes: ");
@@ -48,18 +48,19 @@ public class Profesor extends Usuario {
                     break; // Se utiliza para que no siga corriendo el for
                 }
             }
+            //Se recopilan los datos
             System.out.println("Para cual materia es la reserva?");
             String asignatura = sc.nextLine();
 
             System.out.println("Ingrese el nombre del aula que desee: ");
             String nombre = sc.nextLine();
-
+            //Se pide input para crear la reserva
             System.out.println("Deseas crear la reserva?");
             String respuesta = sc.nextLine();
             if (respuesta.toUpperCase().equals("SI")) {
-                enviar_correo(asignatura, nombre, decision);
+                enviar_correo(asignatura, nombre, decision); //Envia correo
             } else {
-                Sistema.mostrar_menu();
+                Sistema.mostrar_menu(); //Vuelve al menu si no realiza la reserva
 
             }
         } else if (decision.toUpperCase() == "LABORATORIO") {
@@ -134,10 +135,6 @@ public class Profesor extends Usuario {
             Sistema.mostrar_menu();
         }
         sc.close();
-    }
-
-    public void ConsultarReserva() {
-        System.out.println("Consultando reservas realizadas por el profesor: " + getNombre());
     }
 
     @Override

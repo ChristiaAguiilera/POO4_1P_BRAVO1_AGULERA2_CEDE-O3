@@ -20,6 +20,7 @@ import com.poo.Usuario.*;
 
 public class Sistema {
 
+    //Se crean objetos estaticos para listas de reservas, usuarios, espacios u administradores
     public static Scanner sc = new Scanner(System.in);
     private static ArrayList<Usuario> listaUsuario;
     private static ArrayList<Usuario> listaAdministradores;
@@ -29,16 +30,20 @@ public class Sistema {
 
     public static void main(String[] args) {
 
+        //Se llaman metodos para poder cargar las listas de objetos
         cargarEspaciosDesdeArchivo("resources/Archivos/Espacios.txt"); //Encontrar rutas
         CargarAdministradoresDesdeArchivo("Administradores.txt");
         CargarUsuariosDesdeArchivo("Usuarios.txt");
         actualizarEstudiantes();
         actualizarProfesores();
+
+        //Proceso de login
         System.out.println("Bienvendio al sistema , Ingrese su usario y contraseña: ");
         System.out.println("Usuario: ");
         String usuario = sc.nextLine();
         System.out.println("Contraseña: ");
         String contraseña = sc.nextLine();
+        //Se recorre la lista para poder encontrar al usuario que se esta intentado entrar
         for (Usuario u : listaUsuario) {
             if (usuario.equals(u.getUsuario()) && contraseña.equals(u.getContrasena()))
                 Sistema.usuario = u;
@@ -48,7 +53,7 @@ public class Sistema {
     public static void mostrar_menu(){
         Scanner scanner = new Scanner(System.in);
         int opcion;
-
+        //Imprime las opciones para Usuario
         do {
             System.out.println("Seleccione una de las opciones: ");
             System.out.println("0...Salir");
@@ -56,20 +61,22 @@ public class Sistema {
             System.out.println("2...Consultar reserva");
             opcion = scanner.nextInt();
 
+
+            //Por medio de un switch se desarollan llamadas a cada opcion
             switch (opcion) {
                 case 1:
                     usuario.reservar();
                     break;
                 case 2:
-                    System.out.println("Ingrese la fecha: (28/11/2024) ");
+                    System.out.println("Ingrese la fecha: (28/11/2024) "); //SE pide fecha
                     Date date=null;
                     try{
-                        date = getDateFromString(sc.nextLine());
+                        date = getDateFromString(sc.nextLine()); //Se procesa la fecha
                     }catch (Exception e){
                         e.printStackTrace();
                     }
                     
-                    usuario.ConsultarReserva(date);
+                    usuario.ConsultarReserva(date);//Se llama el metodo de consultar reservas
                     break;
                 case 0:
                     System.out.println("Saliendo del programa...");
@@ -100,7 +107,7 @@ public class Sistema {
                 System.out.println("El archivo no fue encontrado.");
                 return;
             }
-
+            //Se lee el archvio de espacios y se cargan en la lista necesaria
             String linea;
             while ((linea = br.readLine()) != null) {
                 String[] datos = linea.split("\\|");
@@ -122,7 +129,7 @@ public class Sistema {
             e.printStackTrace();
         }
     }
-
+    //Se repite la logica para usuarios
     public static void CargarUsuariosDesdeArchivo(String nombreArchivo) {
         try (InputStream inputStream = Sistema.class.getClassLoader().getResourceAsStream("Archivos/" + nombreArchivo);
         BufferedReader br = new BufferedReader(new InputStreamReader(inputStream))) {
@@ -146,7 +153,6 @@ public class Sistema {
                 // Crear y agregar espacio a la lista
                 if (rol.equals(Rol.ESTUDIANTE)) listaUsuario.add(new Estudiante(codigo, cedula, nombre, apellido, usuario, contrasena, correo, rol, 0, ""));
                 if (rol.equals(Rol.PROFESOR)) listaUsuario.add(new Profesor(codigo, cedula, nombre, apellido, usuario, contrasena, correo, rol, "", new ArrayList<>()));
-                if (rol.equals(Rol.ADMINISTRADOR)) listaUsuario.add(new Administrador(codigo, cedula, nombre, apellido, usuario, contrasena, correo, rol, Cargo.ANALISTA));
             }
             System.out.println("Usuarios cargados exitosamente desde el archivo.");
         } catch (IOException e) {
@@ -178,7 +184,7 @@ public class Sistema {
             System.out.println("Error en el formato del archivo: " + e.getMessage());
         }
     }
-
+    //Actualiza campos de los estudiantes dependiendo de sus campos respectivos
     public static void actualizarEstudiantes() {
         try (BufferedReader br = new BufferedReader(new FileReader("src/main/java/com/poo/Archivos/Estudiante.txt"))) {
             String linea;
@@ -186,6 +192,7 @@ public class Sistema {
                 int codigo = Integer.parseInt(linea.split("\\|")[0]);
                 for (Usuario u : listaUsuario) {
                     if (codigo == u.getCodigo()) {
+                        //Saca al usuario de la lista, crea uno nuevo y actualiza sus datos
                         listaUsuario.remove(u);
                         Estudiante temp = (Estudiante) u;
                         temp.setNumMatricula(Integer.valueOf(linea.split("\\|")[4]));
@@ -200,13 +207,17 @@ public class Sistema {
         }
     }
 
+
+    //Lee el archivo de profesores
     public static void actualizarProfesores() {
         try (BufferedReader br = new BufferedReader(new FileReader("src/main/java/com/poo/Archivos/Estudiante.txt"))) {
             String linea;
+            //Itera cada profesor
             while ((linea = br.readLine()) != null) {
                 int codigo = Integer.parseInt(linea.split("\\|")[0]);
                 for (Usuario u : listaUsuario) {
                     if (codigo == u.getCodigo()) {
+                        //Obtiene a cada profesor, lo remueve, atualiza sus datos y lo guarda.
                         listaUsuario.remove(u);
                         Profesor temp = (Profesor) u;
                         temp.setFacultad(linea.split("\\|")[4]);
@@ -226,14 +237,15 @@ public class Sistema {
     public void mostrar_espacios_disponibles() {
         System.out.println("----- Espacios Disponibles -----");
         boolean hayDisponibles = false;
+        //Se iteran los espacios en lista Espacio para mostrar a los disponibles
         for (Espacio espacio : listaEspacio) {
-            if (espacio.getEstado() == Estado.DISPONIBLE) {
+            if (espacio.getEstado() == Estado.DISPONIBLE) { //Se usa el if para filtrar
                 System.out.println("Código: " + espacio.getCodigo() +
                         ", Tipo: " + espacio.getTipo() +
                         ", Nombre: " + espacio.getNombre() +
                         ", Capacidad: " + espacio.getCapacidad() +
                         ", Rol: " + espacio.getRol());
-                hayDisponibles = true;
+                hayDisponibles = true;//Se imprimen los espacios correspondientes
             }
         }
         if (!hayDisponibles) {
