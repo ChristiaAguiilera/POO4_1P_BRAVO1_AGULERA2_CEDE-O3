@@ -3,6 +3,8 @@ package com.poo;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -11,16 +13,13 @@ import java.util.Date;
 import java.util.Scanner;
 
 import com.poo.Enums.*;
-import com.poo.Usuario.*;
-
-
+<<<<<<< HEAD
+import com.poo.Enums.Tipo;
+import com.poo.Usuario.Usuario;
 
 public class Sistema {
-
-    public static Scanner sc=new Scanner(System.in);
-    private static ArrayList<Usuario> listaUsuario;
-    private static ArrayList<Usuario> listaAdministradores;
-    public static ArrayList<Espacio> listaEspacio=new ArrayList<>();
+    private ArrayList<Usuario> listaUsuario;
+    private static ArrayList<Espacio> listaEspacio=new ArrayList<>();
     private ArrayList<Reserva> listaReserva;
     static Usuario usuario;
 
@@ -28,24 +27,39 @@ public class Sistema {
     public static void main (String[] args){
         
         cargarEspaciosDesdeArchivo("src/main/java/com/poo/Archivos/Espacios.txt");
-        CargarAdministradoresDesdeArchivo("src/main/java/com/poo/Archivos/Administradores.txt");
-        CargarUsuariosDesdeArchivo("src/main/java/com/poo/Archivos/Usuarios.txt");
+=======
+import com.poo.Usuario.*;
+
+public class Sistema {
+
+    public static Scanner sc = new Scanner(System.in);
+    private static ArrayList<Usuario> listaUsuario;
+    private static ArrayList<Usuario> listaAdministradores;
+    public static ArrayList<Espacio> listaEspacio = new ArrayList<>();
+    private ArrayList<Reserva> listaReserva;
+    static Usuario usuario;
+
+    public static void main(String[] args) {
+
+        cargarEspaciosDesdeArchivo("Espacios.txt");
+        CargarAdministradoresDesdeArchivo("Administradores.txt");
+        CargarUsuariosDesdeArchivo("Usuarios.txt");
         actualizarEstudiantes();
         actualizarProfesores();
 
-
+>>>>>>> 16679df4db71ede229d0fa4c604275e77957748e
         System.out.println("Bienvendio al sistema , Ingrese su usario y contraseña: ");
         System.out.println("Usuario: ");
-        String usuario=sc.nextLine();
+        String usuario = sc.nextLine();
         System.out.println("Contraseña: ");
-        String contraseña= sc.nextLine();
-        for(Usuario u: listaUsuario){
-            if(usuario.equals(u.getUsuario())&&contraseña.equals(u.getContrasena())) Sistema.usuario = u;
+        String contraseña = sc.nextLine();
+        for (Usuario u : listaUsuario) {
+            if (usuario.equals(u.getUsuario()) && contraseña.equals(u.getContrasena()))
+                Sistema.usuario = u;
         }
     }
 
-
-    public static void mostrar_menu(){
+    public static void mostrar_menu() {
         Scanner scanner = new Scanner(System.in);
         int opcion;
 
@@ -58,7 +72,7 @@ public class Sistema {
 
             switch (opcion) {
                 case 1:
-                    usuario.reservar(new Date());
+                    usuario.reservar();
                     break;
                 case 2:
                     usuario.ConsultarReserva();
@@ -76,12 +90,18 @@ public class Sistema {
         scanner.close();
     }
 
-    public static void mostrar_menu_administrador(){
+    public static void mostrar_menu_administrador() {
     }
 
-
     public static void cargarEspaciosDesdeArchivo(String nombreArchivo) {
-        try (BufferedReader br = new BufferedReader(new FileReader(nombreArchivo))) {
+        try (InputStream inputStream = Sistema.class.getClassLoader().getResourceAsStream("Archivos/" + nombreArchivo);
+                BufferedReader br = new BufferedReader(new InputStreamReader(inputStream))) {
+
+            if (inputStream == null) {
+                System.out.println("El archivo no fue encontrado.");
+                return;
+            }
+
             String linea;
             while ((linea = br.readLine()) != null) {
                 String[] datos = linea.split("\\|");
@@ -91,9 +111,10 @@ public class Sistema {
                 int capacidad = Integer.parseInt(datos[3].trim());
                 Estado estado = Estado.valueOf(datos[4].trim());
                 Rol rol = Rol.valueOf(datos[5].trim());
+
                 // Crear y agregar espacio a la lista
-              Espacio espacio = new Espacio(codigo, tipo, nombre, capacidad, estado, rol);
-              listaEspacio.add(espacio);
+                Espacio espacio = new Espacio(codigo, tipo, nombre, capacidad, estado, rol);
+                listaEspacio.add(espacio);
             }
             System.out.println("Espacios cargados exitosamente desde el archivo.");
         } catch (IOException e) {
@@ -104,7 +125,14 @@ public class Sistema {
     }
 
     public static void CargarUsuariosDesdeArchivo(String nombreArchivo) {
-        try (BufferedReader br = new BufferedReader(new FileReader(nombreArchivo))) {
+        try (InputStream inputStream = Sistema.class.getClassLoader().getResourceAsStream("Archivos/" + nombreArchivo);
+        BufferedReader br = new BufferedReader(new InputStreamReader(inputStream))) {
+            
+            if (inputStream == null) {
+                System.out.println("El archivo no fue encontrado.");
+                return;
+            }
+
             String linea;
             while ((linea = br.readLine()) != null) {
                 String[] datos = linea.split("\\|");
@@ -117,9 +145,9 @@ public class Sistema {
                 String correo = datos[6].trim();
                 Rol rol = Rol.valueOf(datos[7].trim());
                 // Crear y agregar espacio a la lista
-                if (rol.equals(Rol.E)) listaUsuario.add(new Estudiante(codigo, cedula, nombre, apellido, usuario, contrasena, correo, rol, 0, ""));
-                if (rol.equals(Rol.P)) listaUsuario.add(new Profesor(codigo, cedula, nombre, apellido, usuario, contrasena, correo, rol, "", new ArrayList<>()));
-                if (rol.equals(Rol.A)) listaUsuario.add(new Administrador(codigo, cedula, nombre, apellido, usuario, contrasena, correo, rol, Cargo.ANALISTA));
+                if (rol.equals(Rol.ESTUDIANTE)) listaUsuario.add(new Estudiante(codigo, cedula, nombre, apellido, usuario, contrasena, correo, rol, 0, ""));
+                if (rol.equals(Rol.PROFESOR)) listaUsuario.add(new Profesor(codigo, cedula, nombre, apellido, usuario, contrasena, correo, rol, "", new ArrayList<>()));
+                if (rol.equals(Rol.ADMINISTRADOR)) listaUsuario.add(new Administrador(codigo, cedula, nombre, apellido, usuario, contrasena, correo, rol, Cargo.ANALISTA));
             }
             System.out.println("Usuarios cargados exitosamente desde el archivo.");
         } catch (IOException e) {
@@ -130,7 +158,8 @@ public class Sistema {
     }
 
     public static void CargarAdministradoresDesdeArchivo(String nombreArchivo) {
-        try (BufferedReader br = new BufferedReader(new FileReader(nombreArchivo))) {
+        try (InputStream inputStream = Sistema.class.getClassLoader().getResourceAsStream("Archivos/" + nombreArchivo);
+        BufferedReader br = new BufferedReader(new InputStreamReader(inputStream))) {
             String linea;
             while ((linea = br.readLine()) != null) {
                 String[] datos = linea.split("\\|");
@@ -139,10 +168,11 @@ public class Sistema {
                 String nombre = datos[2].trim();
                 String apellido = datos[3].trim();
                 String cargo = datos[4].trim();
-                
-                listaAdministradores.add(new Administrador(codigo, cedula, nombre, apellido, "", "", "", Rol.A, Cargo.valueOf(cargo)));
+
+                listaAdministradores.add(new Administrador(codigo, cedula, nombre, apellido, "", "", "",
+                        Rol.ADMINISTRADOR, Cargo.valueOf(cargo)));
             }
-            
+
         } catch (IOException e) {
             System.out.println("Error al leer el archivo: " + e.getMessage());
         } catch (Exception e) {
@@ -150,60 +180,60 @@ public class Sistema {
         }
     }
 
-    public static void actualizarEstudiantes(){
+    public static void actualizarEstudiantes() {
         try (BufferedReader br = new BufferedReader(new FileReader("src/main/java/com/poo/Archivos/Estudiante.txt"))) {
             String linea;
             while ((linea = br.readLine()) != null) {
                 int codigo = Integer.parseInt(linea.split("\\|")[0]);
-                for(Usuario u:listaUsuario){
-                    if (codigo==u.getCodigo()){
+                for (Usuario u : listaUsuario) {
+                    if (codigo == u.getCodigo()) {
                         listaUsuario.remove(u);
-                        Estudiante temp=(Estudiante) u;
+                        Estudiante temp = (Estudiante) u;
                         temp.setNumMatricula(Integer.valueOf(linea.split("\\|")[4]));
                         temp.setCarrera(linea.split("\\|")[5]);
                         listaUsuario.add(temp);
                     }
                 }
-                
+
             }
-        }catch(Exception e){
+        } catch (Exception e) {
             System.out.println("Error");
         }
     }
 
-    public static void actualizarProfesores(){
+    public static void actualizarProfesores() {
         try (BufferedReader br = new BufferedReader(new FileReader("src/main/java/com/poo/Archivos/Estudiante.txt"))) {
             String linea;
             while ((linea = br.readLine()) != null) {
                 int codigo = Integer.parseInt(linea.split("\\|")[0]);
-                for(Usuario u:listaUsuario){
-                    if (codigo==u.getCodigo()){
+                for (Usuario u : listaUsuario) {
+                    if (codigo == u.getCodigo()) {
                         listaUsuario.remove(u);
-                        Profesor temp=(Profesor) u;
+                        Profesor temp = (Profesor) u;
                         temp.setFacultad(linea.split("\\|")[4]);
-                        String []amaterias=linea.split("\\|")[5].split(",");
-                        ArrayList<String> materias= new ArrayList<>(Arrays.asList(amaterias));
+                        String[] amaterias = linea.split("\\|")[5].split(",");
+                        ArrayList<String> materias = new ArrayList<>(Arrays.asList(amaterias));
                         temp.setListaMaterias(materias);
                         listaUsuario.add(temp);
                     }
                 }
-                
+
             }
-        }catch(Exception e){
+        } catch (Exception e) {
             System.out.println("Error");
         }
     }
 
-    public  void mostrar_espacios_disponibles() {
+    public void mostrar_espacios_disponibles() {
         System.out.println("----- Espacios Disponibles -----");
         boolean hayDisponibles = false;
         for (Espacio espacio : listaEspacio) {
             if (espacio.getEstado() == Estado.DISPONIBLE) {
                 System.out.println("Código: " + espacio.getCodigo() +
-                                   ", Tipo: " + espacio.getTipo() +
-                                   ", Nombre: " + espacio.getNombre() +
-                                   ", Capacidad: " + espacio.getCapacidad() +
-                                   ", Rol: " + espacio.getRol());
+                        ", Tipo: " + espacio.getTipo() +
+                        ", Nombre: " + espacio.getNombre() +
+                        ", Capacidad: " + espacio.getCapacidad() +
+                        ", Rol: " + espacio.getRol());
                 hayDisponibles = true;
             }
         }
@@ -212,7 +242,22 @@ public class Sistema {
         }
         System.out.println("---------------------------------");
     }
-    
+<<<<<<< HEAD
+    public static void CargarUsuarios(String Archivo){
+        try (BufferedReader br = new BufferedReader(new FileReader(Archivo))) {
+            String linea;
+            while ((linea = br.readLine()) != null) {
+                String[] datos = linea.split("\\|");
+                int codigo = Integer.parseInt(datos[0].trim());
+                String cedula=datos[0].trim();
+            }
+
+    }catch(IOException e){
+        e.printStackTrace();
+   
 }
+}
+=======
 
-
+>>>>>>> 16679df4db71ede229d0fa4c604275e77957748e
+}
