@@ -1,5 +1,7 @@
-package com.poo.Usuario;
+//La clase Profesor usa uno de los pilares de la programacion orientada a objetos que es la herencia. 
 
+
+package com.poo.Usuario;
 import com.poo.Sistema;
 import com.poo.Enums.*;
 

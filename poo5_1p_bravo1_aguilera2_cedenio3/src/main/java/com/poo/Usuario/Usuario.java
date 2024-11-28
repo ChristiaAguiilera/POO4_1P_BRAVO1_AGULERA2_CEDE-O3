@@ -2,32 +2,26 @@ package com.poo.Usuario;
 
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.Scanner;
 
 // Se importan paquetes para poder enviar el correo
 import javax.mail.*;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import io.github.cdimascio.dotenv.*;
+
 import java.util.Properties;
 
-import com.poo.Espacio;
+import com.poo.Reserva;
 import com.poo.Sistema;
-
 import com.poo.Enums.*;
 
-
 import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 
-public abstract class Usuario {
+public abstract class Usuario { // se usa uno de los pilares de la programacion, abstract. 
     private int codigo;
     private String cedula;
     private String nombre;
@@ -50,11 +44,12 @@ public abstract class Usuario {
     }
 
     // metodos
-    public void reservar() {
+    public void reservar(){}
 
-    }
-
-    public void ConsultarReserva() {
+    public void ConsultarReserva(Date date) {
+        for(Reserva r: Sistema.listaReserva){
+            if(r.getFecha().equals(date)) System.out.println(r.toString());
+        }
 
     }
 

@@ -5,10 +5,13 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+ // import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collection;
-import java.util.Collections;
+ // import java.util.Collection;
+ // import java.util.Collections;
 import java.util.Date;
 import java.util.Scanner;
 
@@ -21,12 +24,12 @@ public class Sistema {
     private static ArrayList<Usuario> listaUsuario;
     private static ArrayList<Usuario> listaAdministradores;
     public static ArrayList<Espacio> listaEspacio = new ArrayList<>();
-    private ArrayList<Reserva> listaReserva;
+    public static ArrayList<Reserva> listaReserva;
     static Usuario usuario;
 
     public static void main(String[] args) {
 
-        cargarEspaciosDesdeArchivo("Espacios.txt");
+        cargarEspaciosDesdeArchivo("resources/Archivos/Espacios.txt"); //Encontrar rutas
         CargarAdministradoresDesdeArchivo("Administradores.txt");
         CargarUsuariosDesdeArchivo("Usuarios.txt");
         actualizarEstudiantes();
@@ -42,7 +45,7 @@ public class Sistema {
         }
     }
 
-    public static void mostrar_menu() {
+    public static void mostrar_menu(){
         Scanner scanner = new Scanner(System.in);
         int opcion;
 
@@ -58,7 +61,15 @@ public class Sistema {
                     usuario.reservar();
                     break;
                 case 2:
-                    usuario.ConsultarReserva();
+                    System.out.println("Ingrese la fecha: (28/11/2024) ");
+                    Date date=null;
+                    try{
+                        date = getDateFromString(sc.nextLine());
+                    }catch (Exception e){
+                        e.printStackTrace();
+                    }
+                    
+                    usuario.ConsultarReserva(date);
                     break;
                 case 0:
                     System.out.println("Saliendo del programa...");
@@ -71,6 +82,11 @@ public class Sistema {
         } while (opcion != 0);
 
         scanner.close();
+    }
+
+    public static Date getDateFromString(String dateStr) throws ParseException {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        return dateFormat.parse(dateStr);
     }
 
     public static void mostrar_menu_administrador() {
@@ -103,7 +119,7 @@ public class Sistema {
         } catch (IOException e) {
             System.out.println("Error al leer el archivo: " + e.getMessage());
         } catch (Exception e) {
-            System.out.println("Error en el formato del archivo: " + e.getMessage());
+            e.printStackTrace();
         }
     }
 

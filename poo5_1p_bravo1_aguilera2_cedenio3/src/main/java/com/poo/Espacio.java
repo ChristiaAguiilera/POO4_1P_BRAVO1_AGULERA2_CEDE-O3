@@ -1,6 +1,8 @@
+// la clase Espacios es una clase estructural para instanciar un objeto espacio. Por ende no es necesario 
+
 package com.poo;
-import java.io.*;
-import java.util.ArrayList;
+ // import java.io.*;
+ // import java.util.ArrayList;
 
 import com.poo.Enums.Estado;
 import com.poo.Enums.Rol;

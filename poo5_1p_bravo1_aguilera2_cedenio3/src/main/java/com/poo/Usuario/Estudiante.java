@@ -1,6 +1,8 @@
-package com.poo.Usuario;
+//La clase estudiante usa uno de los pilares de la programacion orientada a objetos que es la herencia. 
 
-import com.poo.Espacio;
+package com.poo.Usuario;
+ // import com.poo.Espacio;
+ // import com.poo.Reserva;
 import com.poo.Sistema;
 import com.poo.Enums.*;
 
@@ -21,7 +23,7 @@ public class Estudiante extends Usuario {
 
     }
 
-    public void reservar(Date fecha) {
+    public void reservar(Date fecha) { 
         Scanner sc = new Scanner(System.in);
         System.out.println("Deseas reservar una cancha o un aula?");
         String decision = sc.nextLine();
@@ -72,9 +74,6 @@ public class Estudiante extends Usuario {
 
     }
 
-    public void ConsultarReserva() {
-
-    }
 
     public int getNumMatricula() {
         return numMatricula;
