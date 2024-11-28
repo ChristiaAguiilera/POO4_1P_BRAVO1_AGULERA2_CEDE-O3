@@ -1,10 +1,15 @@
-1001 | 0901234567 | Juan Carlos | Pérez López | juancarlos | Jcperez123 | juancarlos.perez@universidad.edu | PROFESOR
-1002 | 0902345678 | María Elena | Torres Ruiz | maria.torres | Metorres2024 | maria.torres@universidad.edu | PROFESOR
-1003 | 0903456789 | Roberto Andrés | Martínez Gutiérrez | roberto.mg | Robmartinez89 | roberto.martinez@universidad.edu | PROFESOR
-1004 | 0904567890 | Ana Lucía | Vega Salazar | ana.vega | Alvega456 | ana.vega@universidad.edu | PROFESOR
-1005 | 0905678901 | Luis Miguel | Ortega Fernández | luis.ortega | Luortega01 | luis.ortega@universidad.edu | PROFESOR
-2001 | 0906789012 | Daniela Isabel | Sánchez Ríos | daniela.sanchez | Dsanchez2024 | daniela.sanchez@universidad.edu | ESTUDIANTE
-2002 | 0907890123 | José Manuel | Paredes Mora | jose.paredes | Jparedes2024 | jose.paredes@universidad.edu | ESTUDIANTE
-2003 | 0908901234 | Andrea Carolina | Ortiz Mejía | andrea.ortiz | Aortiz2024 | andrea.ortiz@universidad.edu | ESTUDIANTE
-2004 | 0909012345 | Miguel Ángel | Cabrera Romero | miguel.cabrera | Mcabrera2024 | miguel.cabrera@universidad.edu | ESTUDIANTE
-2005 | 0900123456 | Sofía Beatriz | León Villamar | sofia.leon | Sleon2024 | sofia.leon@universidad.edu | ESTUDIANTE
+001 | 0923456789 | Juan | Pérez | jperez | contrasena123 | jperez@universidad.edu | E
+002 | 0912345678 | María | Rodríguez | mrodriguez | password456 | mrodriguez@universidad.edu | P
+003 | 0956781234 | Carlos | Gómez | cgomez | 1234abc | cgomez@universidad.edu | A
+004 | 0934567890 | Ana | Morales | amorales | clave789 | amorales@universidad.edu | E
+005 | 0945678912 | Pedro | Sánchez | psanchez | pass321 | psanchez@universidad.edu | P
+006 | 0961234567 | Lucía | Torres | ltorres | secure2023 | ltorres@universidad.edu | A
+007 | 0957891234 | Javier | Castillo | jcastillo | castillo123 | jcastillo@universidad.edu | E
+008 | 0946789123 | Diana | Vargas | dvargas | vargas2020 | dvargas@universidad.edu | P
+009 | 0924567891 | Andrés | Molina | amolina | molina456 | amolina@universidad.edu | A
+010 | 0931234567 | Sofía | López | slopez | lopez987 | slopez@universidad.edu | E
+011 | 0927894561 | Jorge | Herrera | jherrera | herrera123 | jherrera@universidad.edu | P
+012 | 0919876543 | Gabriela | Jiménez | gjimenez | jimenez789 | gjimenez@universidad.edu | A
+013 | 0954321789 | David | Castillo | dcastillo | castillo2023 | dcastillo@universidad.edu | E
+014 | 0943219876 | Laura | Peña | lpena | pena456 | lpena@universidad.edu | P
+015 | 0967891234 | Alejandro | Ramos | aramos | ramos123 | aramos@universidad.edu | A

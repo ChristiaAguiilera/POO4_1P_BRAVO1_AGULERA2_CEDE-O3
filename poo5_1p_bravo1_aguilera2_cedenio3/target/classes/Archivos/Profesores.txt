@@ -1,5 +1,5 @@
-1001 | 0901234567 | Juan Carlos | Pérez López | Ingeniería | Física, Matemáticas
-1002 | 0902345678 | María Elena | Torres Ruiz | Ciencias Sociales | Sociología, Historia
-1003 | 0903456789 | Roberto Andrés | Martínez Gutiérrez | Ingeniería | Programación, Algoritmos
-1004 | 0904567890 | Ana Lucía | Vega Salazar | Medicina | Anatomía, Fisiología
-1005 | 0905678901 | Luis Miguel | Ortega Fernández | Administración | Contabilidad, Finanzas
+002 | 0912345678 | María | Rodríguez | Facultad de Ingeniería en Computación | Programación Avanzada, Estructuras de Datos
+008 | 0946789123 | Diana | Vargas | Facultad de Ciencias Económicas | Microeconomía, Macroeconomía
+011 | 0927894561 | Jorge | Herrera | Facultad de Ingeniería Eléctrica y Electrónica | Circuitos Eléctricos, Electrónica Digital
+014 | 0943219876 | Laura | Peña | Facultad de Ciencias Naturales | Química Orgánica, Biología Celular
+005 | 0945678912 | Pedro | Sánchez | Facultad de Ingeniería Mecánica | Mecánica de Fluidos, Termodinámica
