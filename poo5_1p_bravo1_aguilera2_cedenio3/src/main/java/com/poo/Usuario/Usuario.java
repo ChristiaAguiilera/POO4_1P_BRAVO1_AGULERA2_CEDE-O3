@@ -39,12 +39,13 @@ public abstract class Usuario { // se usa uno de los pilares de la programacion,
         this.nombre = nombre;
         this.apellido = apellido;
         this.contrasena = contrasena;
-
         this.usuario = usuario;
+        this.rol=rol;
+        this.correo=correo;
     }
 
     // metodos
-    public void reservar(){}
+    public abstract void reservar();
 
     public void ConsultarReserva(Date date) {
         for(Reserva r: Sistema.listaReserva){

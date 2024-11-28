@@ -47,12 +47,16 @@ public class Sistema {
         for (Usuario u : listaUsuario) {
             if (usuario.equals(u.getUsuario()) && contraseña.equals(u.getContrasena())){
                 Sistema.usuario = u;
-                System.out.println("Bienvenidoo al sistema");
-            }
+                System.out.println("Bienvenido al sistema");
+                System.out.println(Sistema.usuario);
+            } 
+        } if(Sistema.usuario==null){
+            System.out.println("No existe tu usuario");
         }
+        mostrar_menu(Sistema.usuario);
+      
     }
-
-    public static void mostrar_menu(){
+    public static void mostrar_menu(Usuario u){
         Scanner scanner = new Scanner(System.in);
         int opcion;
         //Imprime las opciones para Usuario
@@ -62,12 +66,20 @@ public class Sistema {
             System.out.println("1...Reservar");
             System.out.println("2...Consultar reserva");
             opcion = scanner.nextInt();
-
-
             //Por medio de un switch se desarollan llamadas a cada opcion
             switch (opcion) {
                 case 1:
-                    usuario.reservar();
+                    if(u.getRol()==Rol.ESTUDIANTE){
+                        Estudiante e= (Estudiante)u;
+                        System.out.println("Ingrese la fecha: (28/11/2024) "); //SE pide fecha
+                        Date date=null;
+                        try{
+                            date = getDateFromString(sc.nextLine()); //Se procesa la fecha
+                        }catch (Exception a){
+                            a.printStackTrace();
+                        }
+                        e.reservar(date);
+                    }
                     break;
                 case 2:
                     System.out.println("Ingrese la fecha: (28/11/2024) "); //SE pide fecha
@@ -152,8 +164,8 @@ public class Sistema {
                 String correo = datos[6].trim();
                 Rol rol = Rol.valueOf(datos[7].trim());
                 // Crear y agregar espacio a la lista
-                if (rol.equals(Rol.ESTUDIANTE)) listaUsuario.add(new Estudiante(codigo, cedula, nombre, apellido, usuario, contrasena, correo, rol, 0, ""));
-                if (rol.equals(Rol.PROFESOR)) listaUsuario.add(new Profesor(codigo, cedula, nombre, apellido, usuario, contrasena, correo, rol, "", new ArrayList<>()));
+                if (rol.equals(Rol.ESTUDIANTE)) listaUsuario.add(new Estudiante(codigo, cedula, nombre, apellido, usuario, contrasena, correo, 0, ""));
+                if (rol.equals(Rol.PROFESOR)) listaUsuario.add(new Profesor(codigo, cedula, nombre, apellido, usuario, contrasena, correo, "", new ArrayList<>()));
             }
             System.out.println("Usuarios cargados exitosamente desde el archivo.");
         } catch (IOException e) {

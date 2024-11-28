@@ -15,8 +15,8 @@ public class Profesor extends Usuario {
 
     // Constructor
     public Profesor(int codigo, String cedula, String nombre, String apellido, String usuario, String contrasena,
-            String correo, Rol rol, String facultad, ArrayList<String> listaMaterias) {
-        super(codigo, cedula, nombre, apellido, usuario, contrasena, correo, Rol.valueOf("PROFESOR"));
+            String correo, String facultad, ArrayList<String> listaMaterias) {
+        super(codigo, cedula, nombre, apellido, usuario, contrasena, correo, Rol.PROFESOR);
 
         this.facultad = facultad;
         this.listaMaterias = listaMaterias;
@@ -60,7 +60,7 @@ public class Profesor extends Usuario {
             if (respuesta.toUpperCase().equals("SI")) {
                 enviar_correo(asignatura, nombre, decision); //Envia correo
             } else {
-                Sistema.mostrar_menu(); //Vuelve al menu si no realiza la reserva
+                Sistema.mostrar_menu(this); //Vuelve al menu si no realiza la reserva
 
             }
         } else if (decision.toUpperCase() == "LABORATORIO") {
@@ -93,7 +93,7 @@ public class Profesor extends Usuario {
             if (respuesta.toUpperCase().equals("SI")) {
                 enviar_correo(asignatura, nombre, decision);
             } else {
-                Sistema.mostrar_menu();
+                Sistema.mostrar_menu(this);
 
             }
         } else if (decision.toUpperCase() == "AUDITORIO") {
@@ -125,14 +125,14 @@ public class Profesor extends Usuario {
             if (respuesta.toUpperCase().equals("SI")) {
                 enviar_correo(asignatura, nombre, decision);
             } else {
-                Sistema.mostrar_menu();
+                Sistema.mostrar_menu(this);
 
             }
 
         } else {
             // Si no inserta un tipo valido se le muestra el menu nuevamente
             System.out.println("No valido vuelva a intentarlo");
-            Sistema.mostrar_menu();
+            Sistema.mostrar_menu(this);
         }
         sc.close();
     }
@@ -162,6 +162,12 @@ public class Profesor extends Usuario {
 
     public void setListaMaterias(ArrayList<String> listaMaterias) {
         this.listaMaterias = listaMaterias;
+    }
+
+    @Override
+    public void reservar() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'reservar'");
     }
 
 }
