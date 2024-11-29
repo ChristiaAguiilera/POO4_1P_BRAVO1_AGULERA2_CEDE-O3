@@ -135,6 +135,7 @@ public class Sistema {
             }
 
         }while(opcion!= 0);
+        scanner.close();
     }
 
     public static void cargarEspaciosDesdeArchivo(String nombreArchivo) {
@@ -224,7 +225,8 @@ public class Sistema {
     }
     //Actualiza campos de los estudiantes dependiendo de sus campos respectivos
     public static void actualizarEstudiantes() {
-        try (BufferedReader br = new BufferedReader(new FileReader("src/main/resources/Archivos/Estudiante.txt"))) {
+        try (InputStream inputStream = Sistema.class.getClassLoader().getResourceAsStream("Archivos/" + "Estudiante.txt");
+        BufferedReader br = new BufferedReader(new InputStreamReader(inputStream))) {
             String linea;
             while ((linea = br.readLine()) != null) {
                 String[] datos = linea.split("\\|");
@@ -248,7 +250,8 @@ public class Sistema {
 
     //Lee el archivo de profesores
     public static void actualizarProfesores() {
-        try (BufferedReader br = new BufferedReader(new FileReader("src/main/resources/Archivos/Profesores.txt"))) {
+        try (InputStream inputStream = Sistema.class.getClassLoader().getResourceAsStream("Archivos/" + "Profesores.txt");
+        BufferedReader br = new BufferedReader(new InputStreamReader(inputStream))) {
             String linea;
             //Itera cada profesor
             while ((linea = br.readLine()) != null) {
