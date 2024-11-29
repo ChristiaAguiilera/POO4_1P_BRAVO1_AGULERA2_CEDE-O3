@@ -2,11 +2,15 @@
 
 
 package com.poo.Usuario;
+import com.poo.Espacio;
+import com.poo.Reserva;
 import com.poo.Sistema;
 import com.poo.Enums.*;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Scanner;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class Profesor extends Usuario {
     // Atributos específicos
@@ -24,119 +28,40 @@ public class Profesor extends Usuario {
 
     // Métodos específicos
     public void reservar(String materia) {
-        Scanner sc = new Scanner(System.in);
-        System.out.println("Deseas reservar un laboratorio, aula o auditorio?"); //SOlicita input para tipo de espacio
-        String decision = sc.nextLine();
-        ArrayList<String> lineas = LeeFichero("Espacio.txt"); //carga los espacios
-        ArrayList<String> profesores = LeeFichero("Profesores.txt"); //carga los profesores
-
-        if (decision.toUpperCase() == "AULA") {
-            System.out.println("Las aulas disponibles son las siguientes: ");
-            // Se presentan las aulas disponibles
-            for (int i = 0; i < lineas.size(); i++) {
-                String[] palabras = lineas.get(i).split("|");
-                if (palabras[4] != "RESERVADO" & palabras[1] == "AULA") {
-                    System.out.println(palabras[2] + " - " + palabras[3]);
-                }
+        Espacio espacio_reser=null;
+        Scanner sc = new Scanner(System.in);     
+        for(Espacio espacio: Sistema.listaEspacio){
+            if(espacio.getTipo()==Tipo.AULA ||espacio.getTipo()==Tipo.LABORATORIO ||espacio.getTipo()==Tipo.AUDITORIO  && espacio.getEstado()==Estado.DISPONIBLE){
+                System.out.println("-"+espacio.getNombre());
             }
-            // Se muestran materias del profesor
-            for (int i = 0; i < profesores.size(); i++) {
-                // Se verifica el nombre del profesor
-                String[] profe = profesores.get(i).split("|");
-                if (getNombre().equals(profe[2])) {
-                    System.out.println(profe[5]);
-                    break; // Se utiliza para que no siga corriendo el for
-                }
-            }
-            //Se recopilan los datos
-            System.out.println("Para cual materia es la reserva?");
-            String asignatura = sc.nextLine();
-
-            System.out.println("Ingrese el nombre del aula que desee: ");
-            String nombre = sc.nextLine();
-            //Se pide input para crear la reserva
-            System.out.println("Deseas crear la reserva?");
-            String respuesta = sc.nextLine();
-            if (respuesta.toUpperCase().equals("SI")) {
-                enviar_correo(asignatura, nombre, decision); //Envia correo
-            } else {
-                Sistema.mostrar_menu(this); //Vuelve al menu si no realiza la reserva
-
-            }
-        } else if (decision.toUpperCase() == "LABORATORIO") {
-            // Se presentan las aulas disponibles
-            for (int i = 0; i < lineas.size(); i++) {
-                String[] palabras = lineas.get(i).split("|");
-                if (palabras[4] != "RESERVADO" & palabras[1] == "LABORATORIO") {
-                    System.out.println(palabras[2] + " - " + palabras[3]);
-                }
-            }
-            // Se muestran materias del profesor
-            for (int i = 0; i < profesores.size(); i++) {
-                // Se verifica el nombre del profesor
-                String[] profe = profesores.get(i).split("|");
-                if (getNombre().equals(profe[2])) {
-                    System.out.println(profe[5]);
-                    break; // Se utiliza para que no siga corriendo el for
-                }
-
-            }
-            System.out.println("Para cual materia es la reserva?");
-            String asignatura = sc.nextLine();
-
-            System.out.println("Ingrese el nombre del laboratorio que desee: ");
-            String nombre = sc.nextLine();
-
-            System.out.println("Deseas crear la reserva?");
-            String respuesta = sc.nextLine();
-
-            if (respuesta.toUpperCase().equals("SI")) {
-                enviar_correo(asignatura, nombre, decision);
-            } else {
-                Sistema.mostrar_menu(this);
-
-            }
-        } else if (decision.toUpperCase() == "AUDITORIO") {
-            // Se presentan las aulas disponibles
-            for (int i = 0; i < lineas.size(); i++) {
-                String[] palabras = lineas.get(i).split("|");
-                if (palabras[4] != "RESERVADO" & palabras[1] == "AUDITORIO") {
-                    System.out.println(palabras[2] + " - " + palabras[3]);
-                }
-            }
-            // Se muestran materias del profesor
-            for (int i = 0; i < profesores.size(); i++) {
-                // Se verifica el nombre del profesor
-                String[] profe = profesores.get(i).split("|");
-                if (getNombre().equals(profe[2])) {
-                    System.out.println(profe[5]);
-                    break; // Se utiliza para que no siga corriendo el for
-                }
-            }
-            System.out.println("Para cual materia es la reserva?");
-            String asignatura = sc.nextLine();
-
-            System.out.println("Ingrese el nombre del laboratorio que desee: ");
-            String nombre = sc.nextLine();
-
-            System.out.println("Deseas crear la reserva?");
-            String respuesta = sc.nextLine();
-
-            if (respuesta.toUpperCase().equals("SI")) {
-                enviar_correo(asignatura, nombre, decision);
-            } else {
-                Sistema.mostrar_menu(this);
-
-            }
-
-        } else {
-            // Si no inserta un tipo valido se le muestra el menu nuevamente
-            System.out.println("No valido vuelva a intentarlo");
-            Sistema.mostrar_menu(this);
         }
-        sc.close();
+        System.out.println("Escriba el espacio q quiere reservar(Aula, Laboratorio, Disponible)"); //SOlicita input para tipo de espacio
+            String decision = sc.nextLine();
+            System.out.println("Ingrese el nombre del auditorio,laboratio o Aula");
+            String nombre = sc.nextLine();
+            for(Espacio espacio: Sistema.listaEspacio){
+                if(espacio.getTipo()==Tipo.AULA ||espacio.getTipo()==Tipo.LABORATORIO ||espacio.getTipo()==Tipo.AUDITORIO  && espacio.getEstado()==Estado.DISPONIBLE){
+                    espacio_reser=espacio;
+                }
+            }
+            System.out.println("Deseas crear la reserva?");
+            String respuesta = sc.nextLine();
+              System.out.println("Ingrese la fecha: (28/11/2024) "); //SE pide fecha
+                        Date date=null;
+                        try{
+                            date = Sistema.getDateFromString(sc.nextLine()); //Se procesa la fecha
+                        }catch (Exception a){
+                            a.printStackTrace();
+                        };
+            if (respuesta.toUpperCase().equals("SI")) {
+                enviar_correo(materia, nombre, decision);
+                int codigo = ThreadLocalRandom.current().nextInt(1000, 10000);
+                Reserva r= new Reserva(codigo,date, nombre, Estado.APROBADO,espacio_reser.getTipo(), this, espacio_reser.getCapacidad());
+                Sistema.listaReserva.add(r);
+            } else {
+                Sistema.mostrar_menu(this);
+            }
     }
-
     @Override
     public String toString() {
         return "Profesor {" +

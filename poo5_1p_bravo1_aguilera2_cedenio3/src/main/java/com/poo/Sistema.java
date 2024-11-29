@@ -83,6 +83,7 @@ public class Sistema {
                     for(String materia: p.getListaMaterias()){
                         System.out.println(materia);
                     }
+                    System.out.println("Escoge la materia que va a dar");
                     String materia_reserva=sc.nextLine();
                     p.reservar(materia_reserva);
                     }
