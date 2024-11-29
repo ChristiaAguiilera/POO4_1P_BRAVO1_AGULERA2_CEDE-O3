@@ -7,13 +7,13 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
- // import java.text.DateFormat;
+// import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
- // import java.util.Collection;
- // import java.util.Collections;
+// import java.util.Collection;
+// import java.util.Collections;
 import java.util.Date;
 import java.util.Scanner;
 
@@ -22,91 +22,97 @@ import com.poo.Usuario.*;
 
 public class Sistema {
 
-    //Se crean objetos estaticos para listas de reservas, usuarios, espacios u administradores
+    // Se crean objetos estaticos para listas de reservas, usuarios, espacios u
+    // administradores
     public static Scanner sc = new Scanner(System.in);
-    private static ArrayList<Usuario> listaUsuario=new ArrayList<>();
-    private static ArrayList<Usuario> listaAdministradores= new ArrayList<>();
+    private static ArrayList<Usuario> listaUsuario = new ArrayList<>();
+    private static ArrayList<Usuario> listaAdministradores = new ArrayList<>();
     public static ArrayList<Espacio> listaEspacio = new ArrayList<>();
-    public static ArrayList<Reserva> listaReserva=new ArrayList<>();
+    public static ArrayList<Reserva> listaReserva = new ArrayList<>();
     static Usuario usuario;
+
     public static void main(String[] args) {
-        //Se llaman metodos para poder cargar las listas de objetos
+        // Se llaman metodos para poder cargar las listas de objetos
         CargarUsuariosDesdeArchivo("Usuarios.txt");
-        cargarEspaciosDesdeArchivo("Espacios.txt"); //Encontrar rutas
+        cargarEspaciosDesdeArchivo("Espacios.txt"); // Encontrar rutas
         CargarAdministradoresDesdeArchivo("Administradores.txt");
         actualizarEstudiantes();
         actualizarProfesores();
-        //Proceso de login
+        // Proceso de login
         System.out.println("Bienvendio al sistema , Ingrese su usario y contraseña: ");
         System.out.println("Usuario: ");
         String usuario = sc.nextLine();
         System.out.println("Contraseña: ");
-        String contraseña = sc.nextLine(); 
-        //Se recorre la lista para poder encontrar al usuario que se esta intentado entrar
+        String contraseña = sc.nextLine();
+        // Se recorre la lista para poder encontrar al usuario que se esta intentado
+        // entrar
         for (Usuario u : listaUsuario) {
-            if (usuario.equals(u.getUsuario()) && contraseña.equals(u.getContrasena())){
+            if (usuario.equals(u.getUsuario()) && contraseña.equals(u.getContrasena())) {
                 Sistema.usuario = u;
                 System.out.println("Bienvenido al sistema");
                 System.out.println(Sistema.usuario);
             }
-        } if(Sistema.usuario==null){
+        }
+        if (Sistema.usuario == null) {
             System.out.println("No existe tu usuario");
         }
         mostrar_menu(Sistema.usuario);
     }
 
+    /**
+     * Muestra el menú de opciones para un usuario y permite realizar reservas o
+     * consultar reservas,
+     * dependiendo del rol del usuario (Estudiante o Profesor).
+     * 
+     * @param u El usuario que interactúa con el sistema. El usuario puede ser de
+     *          tipo {@link Estudiante} o {@link Profesor}.
+     */
 
-/**
- * Muestra el menú de opciones para un usuario y permite realizar reservas o consultar reservas, 
- * dependiendo del rol del usuario (Estudiante o Profesor).
- * @param u El usuario que interactúa con el sistema. El usuario puede ser de tipo {@link Estudiante} o {@link Profesor}.
- */
-
-    public static void mostrar_menu(Usuario u){
+    public static void mostrar_menu(Usuario u) {
         Scanner scanner = new Scanner(System.in);
         int opcion;
-        //Imprime las opciones para Usuario
+        // Imprime las opciones para Usuario
         do {
             System.out.println("Seleccione una de las opciones: ");
             System.out.println("0. Salir");
             System.out.println("1. Reservar");
             System.out.println("2. Consultar reserva");
             opcion = scanner.nextInt();
-            //Por medio de un switch se desarollan llamadas a cada opcion
+            // Por medio de un switch se desarollan llamadas a cada opcion
             switch (opcion) {
                 case 1:
-                    if(u.getRol()==Rol.ESTUDIANTE){
-                        Estudiante e= (Estudiante)u;
-                        System.out.println("Ingrese la fecha: (28/11/2024) "); //SE pide fecha
-                        Date date=null;
-                        try{
-                            date = getDateFromString(sc.nextLine()); //Se procesa la fecha
-                        }catch (Exception a){
+                    if (u.getRol() == Rol.ESTUDIANTE) {
+                        Estudiante e = (Estudiante) u;
+                        System.out.println("Ingrese la fecha: (28/11/2024) "); // SE pide fecha
+                        Date date = null;
+                        try {
+                            date = getDateFromString(sc.nextLine()); // Se procesa la fecha
+                        } catch (Exception a) {
                             a.printStackTrace();
                         }
                         e.reservar(date);
                         Reserva linea = listaReserva.get(listaReserva.size() - 1);
 
                         Sistema.EscribirArchivo("reserva.txt", linea);
-                    }else if(u.getRol()==Rol.PROFESOR){
-                    Profesor p = (Profesor) u;
-                    for(String materia: p.getListaMaterias()){
-                        System.out.println(materia);
-                    }
-                    System.out.println("Escoge la materia que va a dar");
-                    String materia_reserva=sc.nextLine();
-                    p.reservar(materia_reserva);
+                    } else if (u.getRol() == Rol.PROFESOR) {
+                        Profesor p = (Profesor) u;
+                        for (String materia : p.getListaMaterias()) {
+                            System.out.println(materia);
+                        }
+                        System.out.println("Escoge la materia que va a dar");
+                        String materia_reserva = sc.nextLine();
+                        p.reservar(materia_reserva);
                     }
                     break;
                 case 2:
-                    System.out.println("Ingrese la fecha: (28/11/2024) "); //SE pide fecha
-                    Date date=null;
-                    try{
-                        date = getDateFromString(sc.nextLine()); //Se procesa la fecha
-                    }catch (Exception e){
+                    System.out.println("Ingrese la fecha: (28/11/2024) "); // SE pide fecha
+                    Date date = null;
+                    try {
+                        date = getDateFromString(sc.nextLine()); // Se procesa la fecha
+                    } catch (Exception e) {
                         e.printStackTrace();
                     }
-                    usuario.ConsultarReserva(date);//Se llama el metodo de consultar reservas
+                    usuario.ConsultarReserva(date);// Se llama el metodo de consultar reservas
                     break;
                 case 0:
                     System.out.println("Saliendo del programa...");
@@ -121,10 +127,11 @@ public class Sistema {
         scanner.close();
     }
 
-
     /**
      * Convierte una cadena de texto en un objeto {@link Date}.
-     * @param dateStr La cadena de texto que representa la fecha en formato "dd/MM/yyyy".
+     * 
+     * @param dateStr La cadena de texto que representa la fecha en formato
+     *                "dd/MM/yyyy".
      * @return Un objeto {@link Date} correspondiente a la cadena proporcionada.
      */
 
@@ -132,12 +139,13 @@ public class Sistema {
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
         return dateFormat.parse(dateStr);
     }
+
     public static void mostrar_menu_administrador(Usuario us) {
         int opcion;
-        Administrador ad =(Administrador) us;
+        Administrador ad = (Administrador) us;
         Scanner scanner = new Scanner(System.in);
         System.out.println("Bienvenido");
-        do{
+        do {
             System.out.println("Seleccione una de las opciones: ");
             System.out.println("0...Salir");
             System.out.println("1...Gestioanr Reserva");
@@ -154,15 +162,19 @@ public class Sistema {
                     break;
             }
 
-        }while(opcion!= 0);
+        } while (opcion != 0);
         scanner.close();
     }
 
-/**
- * Carga los espacios desde un archivo de texto y los agrega a la lista de espacios del sistema.
- * @param nombreArchivo El nombre del archivo que contiene la información de los espacios.
- *                      Este archivo debe estar ubicado en la carpeta `Archivos/` dentro de los recursos del proyecto.
- */
+    /**
+     * Carga los espacios desde un archivo de texto y los agrega a la lista de
+     * espacios del sistema.
+     * 
+     * @param nombreArchivo El nombre del archivo que contiene la información de los
+     *                      espacios.
+     *                      Este archivo debe estar ubicado en la carpeta
+     *                      `Archivos/` dentro de los recursos del proyecto.
+     */
 
     public static void cargarEspaciosDesdeArchivo(String nombreArchivo) {
         try (InputStream inputStream = Sistema.class.getClassLoader().getResourceAsStream("Archivos/" + nombreArchivo);
@@ -171,7 +183,7 @@ public class Sistema {
                 System.out.println("El archivo no fue encontrado.");
                 return;
             }
-            //Se lee el archvio de espacios y se cargan en la lista necesaria
+            // Se lee el archvio de espacios y se cargan en la lista necesaria
             String linea;
             while ((linea = br.readLine()) != null) {
                 String[] datos = linea.split("\\|");
@@ -194,17 +206,21 @@ public class Sistema {
         }
     }
 
-/**
- * Carga los usuarios desde un archivo de texto y los agrega a la lista de usuarios del sistema.
- * @param nombreArchivo El nombre del archivo que contiene la información de los usuarios.
- *                      Este archivo debe estar ubicado en la carpeta `Archivos/` dentro de los recursos del proyecto.
- */
+    /**
+     * Carga los usuarios desde un archivo de texto y los agrega a la lista de
+     * usuarios del sistema.
+     * 
+     * @param nombreArchivo El nombre del archivo que contiene la información de los
+     *                      usuarios.
+     *                      Este archivo debe estar ubicado en la carpeta
+     *                      `Archivos/` dentro de los recursos del proyecto.
+     */
 
-    //Se repite la logica para usuarios
+    // Se repite la logica para usuarios
     public static void CargarUsuariosDesdeArchivo(String nombreArchivo) {
         try (InputStream inputStream = Sistema.class.getClassLoader().getResourceAsStream("Archivos/" + nombreArchivo);
-        BufferedReader br = new BufferedReader(new InputStreamReader(inputStream))) {
-            
+                BufferedReader br = new BufferedReader(new InputStreamReader(inputStream))) {
+
             if (inputStream == null) {
                 System.out.println("El archivo no fue encontrado.");
                 return;
@@ -222,8 +238,12 @@ public class Sistema {
                 String correo = datos[6].trim();
                 Rol rol = Rol.valueOf(datos[7].trim());
                 // Crear y agregar espacio a la lista
-                if (rol.equals(Rol.ESTUDIANTE)) listaUsuario.add(new Estudiante(codigo, cedula, nombre, apellido, usuario, contrasena, correo, 0, ""));
-                if (rol.equals(Rol.PROFESOR)) listaUsuario.add(new Profesor(codigo, cedula, nombre, apellido, usuario, contrasena, correo, "", new ArrayList<>()));
+                if (rol.equals(Rol.ESTUDIANTE))
+                    listaUsuario
+                            .add(new Estudiante(codigo, cedula, nombre, apellido, usuario, contrasena, correo, 0, ""));
+                if (rol.equals(Rol.PROFESOR))
+                    listaUsuario.add(new Profesor(codigo, cedula, nombre, apellido, usuario, contrasena, correo, "",
+                            new ArrayList<>()));
             }
             System.out.println("Usuarios cargados exitosamente desde el archivo.");
         } catch (IOException e) {
@@ -233,15 +253,18 @@ public class Sistema {
         }
     }
 
-
-/**
- * Carga los usuarios desde un archivo de texto y los agrega a la lista de usuarios del sistema.
- * @param nombreArchivo El nombre del archivo que contiene la información de los usuarios.
- *                      Este archivo debe estar ubicado en la carpeta `Archivos/` dentro de los recursos del proyecto.
- */
+    /**
+     * Carga los usuarios desde un archivo de texto y los agrega a la lista de
+     * usuarios del sistema.
+     * 
+     * @param nombreArchivo El nombre del archivo que contiene la información de los
+     *                      usuarios.
+     *                      Este archivo debe estar ubicado en la carpeta
+     *                      `Archivos/` dentro de los recursos del proyecto.
+     */
     public static void CargarAdministradoresDesdeArchivo(String nombreArchivo) {
         try (InputStream inputStream = Sistema.class.getClassLoader().getResourceAsStream("Archivos/" + nombreArchivo);
-        BufferedReader br = new BufferedReader(new InputStreamReader(inputStream))) {
+                BufferedReader br = new BufferedReader(new InputStreamReader(inputStream))) {
             String linea;
             while ((linea = br.readLine()) != null) {
                 String[] datos = linea.split("\\|");
@@ -264,23 +287,25 @@ public class Sistema {
     }
 
     /**
-     * Actualiza la información de los estudiantes en la lista de usuarios desde un archivo de texto.
+     * Actualiza la información de los estudiantes en la lista de usuarios desde un
+     * archivo de texto.
      * El archivo debe contener los datos del estudiante con el siguiente formato:
      * "codigo|cedula|nombre|apellido|numMatricula|carrera".
      */
-        
-    //Actualiza campos de los estudiantes dependiendo de sus campos respectivos
+
+    // Actualiza campos de los estudiantes dependiendo de sus campos respectivos
     public static void actualizarEstudiantes() {
-        try (InputStream inputStream = Sistema.class.getClassLoader().getResourceAsStream("Archivos/" + "Estudiante.txt");
-        BufferedReader br = new BufferedReader(new InputStreamReader(inputStream))) {
+        try (InputStream inputStream = Sistema.class.getClassLoader()
+                .getResourceAsStream("Archivos/" + "Estudiante.txt");
+                BufferedReader br = new BufferedReader(new InputStreamReader(inputStream))) {
             String linea;
             while ((linea = br.readLine()) != null) {
                 String[] datos = linea.split("\\|");
                 int codigo = Integer.parseInt(datos[0].trim());
                 for (Usuario u : listaUsuario) {
                     if (codigo == u.getCodigo()) {
-                        //Sse hace downcasting y se actualiza los datos
-                        Estudiante e= (Estudiante) u;
+                        // Sse hace downcasting y se actualiza los datos
+                        Estudiante e = (Estudiante) u;
                         e.setNumMatricula(Integer.valueOf(datos[4].trim()));
                         e.setCarrera(datos[5].trim());
                     }
@@ -294,23 +319,25 @@ public class Sistema {
     }
 
     /**
-     * Actualiza la información de los profesores en la lista de usuarios desde un archivo de texto.
+     * Actualiza la información de los profesores en la lista de usuarios desde un
+     * archivo de texto.
      * El archivo debe contener los datos del profesor con el siguiente formato:
      * "codigo|cedula|nombre|apellido|usuario|facultad|materias".
      */
 
-    //Lee el archivo de profesores
+    // Lee el archivo de profesores
     public static void actualizarProfesores() {
-        try (InputStream inputStream = Sistema.class.getClassLoader().getResourceAsStream("Archivos/" + "Profesores.txt");
-        BufferedReader br = new BufferedReader(new InputStreamReader(inputStream))) {
+        try (InputStream inputStream = Sistema.class.getClassLoader()
+                .getResourceAsStream("Archivos/" + "Profesores.txt");
+                BufferedReader br = new BufferedReader(new InputStreamReader(inputStream))) {
             String linea;
-            //Itera cada profesor
+            // Itera cada profesor
             while ((linea = br.readLine()) != null) {
                 String[] datos = linea.split("\\|");
                 int codigo = Integer.parseInt(datos[0].trim());
                 for (Usuario u : listaUsuario) {
                     if (codigo == u.getCodigo()) {
-                        //Se hace dowcasting y se actualiza lois datos del profesor
+                        // Se hace dowcasting y se actualiza lois datos del profesor
                         Profesor temp = (Profesor) u;
                         temp.setFacultad(datos[4].trim());
                         String[] amaterias = datos[5].trim().split(",");
@@ -326,23 +353,22 @@ public class Sistema {
         }
     }
 
-
-/**
- * Muestra una lista de los espacios disponibles en el sistema.
-*/
+    /**
+     * Muestra una lista de los espacios disponibles en el sistema.
+     */
 
     public void mostrar_espacios_disponibles() {
         System.out.println("----- Espacios Disponibles -----");
         boolean hayDisponibles = false;
-        //Se iteran los espacios en lista Espacio para mostrar a los disponibles
+        // Se iteran los espacios en lista Espacio para mostrar a los disponibles
         for (Espacio espacio : listaEspacio) {
-            if (espacio.getEstado() == Estado.DISPONIBLE) { //Se usa el if para filtrar
+            if (espacio.getEstado() == Estado.DISPONIBLE) { // Se usa el if para filtrar
                 System.out.println("Código: " + espacio.getCodigo() +
                         ", Tipo: " + espacio.getTipo() +
                         ", Nombre: " + espacio.getNombre() +
                         ", Capacidad: " + espacio.getCapacidad() +
                         ", Rol: " + espacio.getRol());
-                hayDisponibles = true;//Se imprimen los espacios correspondientes
+                hayDisponibles = true;// Se imprimen los espacios correspondientes
             }
         }
         if (!hayDisponibles) {
@@ -350,26 +376,24 @@ public class Sistema {
         }
         System.out.println("---------------------------------");
     }
-public static void EscribirArchivo(String nombreArchivo, Reserva linea) {
+
+    public static void EscribirArchivo(String nombreArchivo, Reserva linea) {
         FileWriter fichero = null;
         BufferedWriter bw = null;
 
         try {
-            // Verifica si la carpeta "data" existe, y si no, créala
             File carpeta = new File("data");
             if (!carpeta.exists()) {
-                carpeta.mkdirs();  // Crea la carpeta "data" si no existe
+                carpeta.mkdirs();
             }
 
-            // Crear el archivo en la carpeta "data"
-            fichero = new FileWriter("data/" + nombreArchivo, true);  // Ruta completa a data/reserva.txt
+            fichero = new FileWriter("data/" + nombreArchivo, true);
             bw = new BufferedWriter(fichero);
 
-            // Asegúrate de que el objeto Reserva no sea null
             if (linea != null) {
-                // Escribe la representación en texto del objeto Reserva
-                bw.write(linea.toString() + "\n");  // Escribir la reserva en el archivo
-                System.out.println("Reserva escrita en el archivo");
+
+                bw.write(linea.toString() + "\n");
+
             } else {
                 System.out.println("La reserva está vacía y no se ha escrito nada");
             }
@@ -378,7 +402,6 @@ public static void EscribirArchivo(String nombreArchivo, Reserva linea) {
             e.printStackTrace();
         } finally {
             try {
-                // Asegurarse de cerrar los flujos correctamente
                 if (bw != null) {
                     bw.close();
                 }
