@@ -1,5 +1,7 @@
 package com.poo.Usuario;
 
+import java.util.Scanner;
+
 import com.poo.Reserva;
 import com.poo.Sistema;
 import com.poo.Enums.*;
@@ -26,8 +28,17 @@ public class Administrador extends Usuario{
      */
 
     public void CambiarReserva(){
-        
-
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Ingrese si quiere aprobar o rechazar la reserva.");
+        String desicion = sc.nextLine();
+        String motivo = "";
+        if(desicion.equals("rechazar")){
+            System.out.println("Ingrese su motivo");
+            motivo = sc.nextLine();
+            enviar_correo(Estado.RECHAZADO, motivo);
+        }
+        enviar_correo(Estado.APROBADO, motivo);
+        sc.close();
     }
 
     /**

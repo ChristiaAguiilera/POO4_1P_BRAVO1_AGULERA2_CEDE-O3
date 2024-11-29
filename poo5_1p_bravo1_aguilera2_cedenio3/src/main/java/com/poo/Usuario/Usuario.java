@@ -214,6 +214,61 @@ public abstract class Usuario { // se usa uno de los pilares de la programacion,
         }
     }
 
+    //Enviar correo por parte del administrador
+    public void enviar_correo(Estado estado, String motivo) {
+        // Se instancia el dotenv lo que sirve para poder enviar el correo
+        Dotenv dot = Dotenv.load();
+
+        String host = dot.get("MAIL_HOST");
+        String port = dot.get("MAIL_PORT");
+        String user = dot.get("MAIL_USER");
+        String pass = dot.get("MAIL_PASS");
+
+        Properties prop = new Properties();
+        prop.put("mail.smtp.host", host);
+        prop.put("mail.smtp.port", port);
+        prop.put("mail.smtp.auth", true);
+        prop.put("mail.smtp.starttls.enable", true); // Usar STARTTLS
+        prop.put("mail.smtp.ssl.trust", host); // Confiar en el host
+        prop.put("mail.smtp.ssl.protocols", "TLSv1.2"); // Forzar TLSv1.2
+
+        // Crear sesión
+        Session session = Session.getInstance(prop, new Authenticator() {
+            protected PasswordAuthentication getPasswordAuthentication() {
+                return new PasswordAuthentication(user, pass);
+            }
+        });
+
+        // Se verifica si son canchas o aulas
+        if (estado.equals(Estado.RECHAZADO) == true) {
+            // Se envia el correo al administrador
+            try {
+                Message mes = new MimeMessage(session);
+                mes.setFrom(new InternetAddress(user, "Reserva Estudiante"));
+                mes.setRecipients(Message.RecipientType.TO, InternetAddress.parse("riicte@gmail.com"));
+                mes.setSubject("Reserva rechazada");
+                mes.setText("Se ha rechazado su reserva con codigo "+getCodigo()+ "por el siguiente motivo: " + motivo);
+                Transport.send(mes);
+                System.out.println("Mensaje enviado");
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
+
+        } else if (estado.equals(Estado.APROBADO)==true) {
+            // Se envia el correo al administrador
+            try {
+                Message mes = new MimeMessage(session);
+                mes.setFrom(new InternetAddress(user, "Reserva Estudiante"));
+                mes.setRecipients(Message.RecipientType.TO, InternetAddress.parse("riicte@gmail.com"));
+                mes.setSubject("Reserva aprovada");
+                mes.setText("Se ha aprovado la reserva con codigo "+ getCodigo());
+                Transport.send(mes);
+                System.out.println("Mensaje enviado");
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
+        }
+    }
     /**
      * Lee las líneas de un archivo de texto ubicado en la carpeta de recursos y las devuelve como una lista de cadenas.
      * @param nombreArchivo el nombre del archivo que se desea leer (debe estar ubicado en `resources/Archivos/`).
