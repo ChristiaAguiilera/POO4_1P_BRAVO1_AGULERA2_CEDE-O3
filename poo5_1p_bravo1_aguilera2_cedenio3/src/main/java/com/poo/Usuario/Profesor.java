@@ -1,7 +1,7 @@
 //La clase Profesor usa uno de los pilares de la programacion orientada a objetos que es la herencia. 
 
-
 package com.poo.Usuario;
+
 import com.poo.Espacio;
 import com.poo.Reserva;
 import com.poo.Sistema;
@@ -26,134 +26,60 @@ public class Profesor extends Usuario {
         this.listaMaterias = listaMaterias;
     }
 
-
     /**
      * Permite realizar una reserva para un aula, laboratorio o auditorio.
+     * 
      * @param materia la materia asociada con la reserva.
      */
     // Métodos específicos
     public void reservar(String materia) {
-        Espacio espacio_reser=null;
-        Scanner sc = new Scanner(System.in);     
-        
-        System.out.println("Deseas reserar un aula, laboratorio o auditorio?"); //SOlicita input para tipo de espacio
-            String decision = sc.nextLine();
-            if (decision.toUpperCase().equals("AULA")==true) {
-                System.out.println("Las aulas disponibles son las siguientes: ");
-                for(Espacio espacio: Sistema.listaEspacio){
-                    if(espacio.getTipo()==Tipo.AULA && espacio.getEstado()==Estado.DISPONIBLE){
-                        System.out.println(espacio.getNombre());
-                    }
-                }
-                System.out.println("Ingrese el nombre del aula que desee: ");
-                String nombre = sc.nextLine();
-                //Para poder encontrar el aula por su nombre 
-                for(Espacio espacio: Sistema.listaEspacio){
-                    if(espacio.getTipo()==Tipo.AULA && espacio.getEstado()==Estado.DISPONIBLE){
-                        if(espacio.getNombre().equals(nombre)==true){
-                            espacio_reser=espacio;
-                            espacio.setEstado(Estado.RESERVADO);
-                        }
-                    }
-                }    
-                System.out.println("Deseas crear la reserva?");
-                String respuesta = sc.nextLine();
-                if (respuesta.toUpperCase().equals("SI")) {
-                    System.out.println("Ingrese la fecha (28/11/2024):  "); //Se pide fecha
-                    Date date=null;
-                    try{
-                        date = Sistema.getDateFromString(sc.nextLine()); //Se procesa la fecha
-                    }catch (Exception a){
-                    a.printStackTrace();
-                    };
-                    int codigo = ThreadLocalRandom.current().nextInt(1000, 10000);
-                    Reserva r= new Reserva(codigo,this.getCodigo(),this.getCedula(),date, nombre, Estado.PENDIENTE, Tipo.CANCHA, this, espacio_reser.getCapacidad(),materia);
-                    Sistema.listaReserva.add(r);
-                    enviar_correo(date, nombre, decision);
-                } else {
-                    System.out.println("Volviendo al menu");
-                }  
-
-            } else if (decision.toUpperCase().equals("LABORATORIO")==true) {
-                System.out.println("Los laboratorios disponibles son los siguientes: ");
-                for(Espacio espacio: Sistema.listaEspacio){
-                    if(espacio.getTipo()==Tipo.AULA && espacio.getEstado()==Estado.DISPONIBLE){
-                        System.out.println(espacio.getNombre());
-                    }
-                }
-                System.out.println("Ingrese el nombre del laboratorio que desea: ");
-                String nombre = sc.nextLine();
-                //Para poder encontrar el laboratorio por su nombre 
-                for(Espacio espacio: Sistema.listaEspacio){
-                    if(espacio.getTipo()==Tipo.AULA && espacio.getEstado()==Estado.DISPONIBLE){
-                        if(espacio.getNombre().equals(nombre)==true){
-                            espacio_reser=espacio;
-                            espacio.setEstado(Estado.RESERVADO);
-                        }
-                    }
-                }    
-                System.out.println("Deseas crear la reserva?");
-                String respuesta = sc.nextLine();
-                if (respuesta.toUpperCase().equals("SI")) {
-                    System.out.println("Ingrese la fecha (28/11/2024):  "); //Se pide fecha
-                    Date date=null;
-                    try{
-                        date = Sistema.getDateFromString(sc.nextLine()); //Se procesa la fecha
-                    }catch (Exception a){
-                    a.printStackTrace();
-                    };
-                    int codigo = ThreadLocalRandom.current().nextInt(1000, 10000);
-                    Reserva r= new Reserva(codigo,this.getCodigo(),this.getCedula(),date, nombre, Estado.PENDIENTE, Tipo.CANCHA, this, espacio_reser.getCapacidad(),materia);
-                    Sistema.listaReserva.add(r);
-                    enviar_correo(date, nombre, decision);
-                } else {
-                    System.out.println("Volviendo al menu");
-                }  
-
-
-            } else if (decision.toUpperCase().equals("AUDITORIO")==true){
-                System.out.println("Los auditorios disponibles son los siguientes: ");
-                for(Espacio espacio: Sistema.listaEspacio){
-                    if(espacio.getTipo()==Tipo.AULA && espacio.getEstado()==Estado.DISPONIBLE){
-                        System.out.println(espacio.getNombre());
-                    }
-                }
-                System.out.println("Ingrese el nombre del auditorio que desea: ");
-                String nombre = sc.nextLine();
-                //Para poder encontrar el auditorio por su nombre 
-                for(Espacio espacio: Sistema.listaEspacio){
-                    if(espacio.getTipo()==Tipo.AULA && espacio.getEstado()==Estado.DISPONIBLE){
-                        if(espacio.getNombre().equals(nombre)==true){
-                            espacio_reser=espacio;
-                            espacio.setEstado(Estado.RESERVADO);
-                        }
-                    }
-                }    
-                System.out.println("Deseas crear la reserva?");
-                String respuesta = sc.nextLine();
-                if (respuesta.toUpperCase().equals("SI")) {
-                    System.out.println("Ingrese la fecha (28/11/2024):  "); //Se pide fecha
-                    Date date=null;
-                    try{
-                        date = Sistema.getDateFromString(sc.nextLine()); //Se procesa la fecha
-                    }catch (Exception a){
-                    a.printStackTrace();
-                    };
-                    int codigo = ThreadLocalRandom.current().nextInt(1000, 10000);
-                    Reserva r= new Reserva(codigo,this.getCodigo(),this.getCedula(),date, nombre, Estado.PENDIENTE, Tipo.CANCHA, this, espacio_reser.getCapacidad(),materia);
-                    Sistema.listaReserva.add(r);
-                    enviar_correo(date, nombre, decision);
-                } else {
-                    System.out.println("Volviendo al menu");
-                }  
-
+        Espacio espacio_reser = null;
+        Scanner sc = new Scanner(System.in);
+        for (Espacio espacio : Sistema.listaEspacio) {
+            if (espacio.getTipo() == Tipo.AULA || espacio.getTipo() == Tipo.LABORATORIO
+                    || espacio.getTipo() == Tipo.AUDITORIO && espacio.getEstado() == Estado.DISPONIBLE) {
+                System.out.println("-" + espacio.getNombre());
             }
-            sc.close();
+        }
+        System.out.println("Escriba el espacio q quiere reservar(Aula, Laboratorio, Auditorio)"); // SOlicita input
+                                                                                                   // para tipo de
+                                                                                                   // espacio
+        String decision = sc.nextLine();
+        System.out.println("Ingrese el nombre del aula, laboratorio o auditorio: ");
+        String nombre = sc.nextLine();
+        for (Espacio espacio : Sistema.listaEspacio) {
+            if (espacio.getTipo() == Tipo.AULA || espacio.getTipo() == Tipo.LABORATORIO
+                    || espacio.getTipo() == Tipo.AUDITORIO && espacio.getEstado() == Estado.DISPONIBLE) {
+                espacio_reser = espacio;
+                espacio.setEstado(Estado.RESERVADO);
+            }
+        }
+        System.out.println("Deseas crear la reserva?");
+        String respuesta = sc.nextLine();
+        System.out.println("Ingrese la fecha: (28/11/2024) "); // SE pide fecha
+        Date date = null;
+        try {
+            date = Sistema.getDateFromString(sc.nextLine()); // Se procesa la fecha
+        } catch (Exception a) {
+            a.printStackTrace();
+        }
+        ;
+        if (respuesta.toUpperCase().equals("SI")) {
+            enviar_correo(materia, nombre, decision);
+            int codigo = ThreadLocalRandom.current().nextInt(1000, 10000);
+            Reserva r = new Reserva(codigo, this.getCodigo(), this.getCedula(), date, nombre, Estado.PENDIENTE,
+                    Tipo.CANCHA, this, espacio_reser.getCapacidad(), "Clases de " + materia);
+            Sistema.listaReserva.add(r);
+        } else {
+            Sistema.mostrar_menu(this);
+        }
     }
 
     /**
      * Devuelve una representación en forma de cadena del objeto `Profesor`.
-     * @return una cadena que representa el objeto `Profesor` con sus atributos clave.
+     * 
+     * @return una cadena que representa el objeto `Profesor` con sus atributos
+     *         clave.
      */
 
     @Override
