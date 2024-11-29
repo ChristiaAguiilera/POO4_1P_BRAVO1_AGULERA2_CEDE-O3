@@ -2,14 +2,17 @@
 
 package com.poo.Usuario;
  import com.poo.Espacio;
+import com.poo.Reserva;
 // import com.poo.Espacio;
  // import com.poo.Reserva;
 import com.poo.Sistema;
 import com.poo.Enums.*;
-
+import java.util.Random;
+import java.security.cert.TrustAnchor;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Scanner;
+import java.util.concurrent.ThreadLocalRandom;
 
 import javax.swing.plaf.TreeUI;
 
@@ -22,10 +25,9 @@ public class Estudiante extends Usuario {
         super(codigo, cedula, nombre, apellido, usuario, contrasena, correo, Rol.ESTUDIANTE);
         this.numMatricula = numMatricula;
         this.carrera = carrera; 
-
     }
-
     public void reservar(Date fecha) { 
+        Espacio espacio_reser=null;
         Scanner sc = new Scanner(System.in);
         System.out.println("Deseas reservar una cancha o un aula?");
         String decision = sc.nextLine();
@@ -38,12 +40,23 @@ public class Estudiante extends Usuario {
             }
             System.out.println("Ingrese el nombre de la cancha que desee: ");
             String nombre = sc.nextLine();
+            //Para poder encontrar la cancha por su nombre 
+            for(Espacio espacio: Sistema.listaEspacio){
+                if(espacio.getTipo()==Tipo.CANCHA && espacio.getEstado()==Estado.DISPONIBLE){
+                    if(espacio.getNombre().equals(nombre)==true){
+                        espacio_reser=espacio;
+                    }
+                }
+            }        
             System.out.println("Deseas crear la reserva?");
             String respuesta = sc.nextLine();
             if (respuesta.toUpperCase().equals("SI")) {
                 enviar_correo(fecha, nombre, decision);
+                int codigo = ThreadLocalRandom.current().nextInt(1000, 10000);
+                Reserva r= new Reserva(codigo, fecha, nombre, Estado.PENDIENTE, Tipo.CANCHA, this, espacio_reser.getCapacidad());
+                Sistema.listaReserva.add(r);
             } else {
-                Sistema.mostrar_menu(this);
+                System.out.println("Volviendo al menu");
             }   
         } else if (decision.toUpperCase().equals("AULA")==true) {
             System.out.println("Las aulas disponibles son las siguientes: ");
@@ -55,21 +68,28 @@ public class Estudiante extends Usuario {
             }
             System.out.println("Ingrese el nombre del aula que desee: ");
             String nombre = sc.nextLine();
+            for(Espacio espacio: Sistema.listaEspacio){
+                if(espacio.getTipo()==Tipo.AULA && espacio.getEstado()==Estado.DISPONIBLE){
+                    if(espacio.getNombre().equals(nombre)==true){
+                        espacio_reser=espacio;
+                    }
+                }
+            }
             System.out.println("Deseas crear la reserva?");
             String respuesta = sc.nextLine();
             if (respuesta.toUpperCase().equals("SI")) {
+                int codigo = ThreadLocalRandom.current().nextInt(1000, 10000);
+                Reserva r= new Reserva(codigo, fecha, nombre, Estado.PENDIENTE, Tipo.CANCHA, this, espacio_reser.getCapacidad());
+                Sistema.listaReserva.add(r);
                 enviar_correo(fecha, nombre, decision);
             } else {
-                Sistema.mostrar_menu(this);
+                System.out.println("Volviendo al menu");
             }
         } else {
             // Si no inserta un tipo valido se le muestra el menu nuevamente
             System.out.println("No valido vuelva a intentarlo");
-            Sistema.mostrar_menu(this);
+            System.out.println("Volviendo al menu");
         }
-
-        sc.close();
-
     }
 
 

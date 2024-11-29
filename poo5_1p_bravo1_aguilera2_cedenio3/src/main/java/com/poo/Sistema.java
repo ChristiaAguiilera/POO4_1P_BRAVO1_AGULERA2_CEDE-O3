@@ -25,7 +25,7 @@ public class Sistema {
     private static ArrayList<Usuario> listaUsuario=new ArrayList<>();
     private static ArrayList<Usuario> listaAdministradores= new ArrayList<>();
     public static ArrayList<Espacio> listaEspacio = new ArrayList<>();
-    public static ArrayList<Reserva> listaReserva;
+    public static ArrayList<Reserva> listaReserva=new ArrayList<>();
     static Usuario usuario;
 
     public static void main(String[] args) {
@@ -36,7 +36,6 @@ public class Sistema {
         CargarAdministradoresDesdeArchivo("Administradores.txt");
         actualizarEstudiantes();
         actualizarProfesores();
-
         //Proceso de login
         System.out.println("Bienvendio al sistema , Ingrese su usario y contraseña: ");
         System.out.println("Usuario: ");
@@ -79,6 +78,13 @@ public class Sistema {
                             a.printStackTrace();
                         }
                         e.reservar(date);
+                    }else if(u.getRol()==Rol.PROFESOR){
+                    Profesor p = (Profesor) u;
+                    for(String materia: p.getListaMaterias()){
+                        System.out.println(materia);
+                    }
+                    String materia_reserva=sc.nextLine();
+                    p.reservar(materia_reserva);
                     }
                     break;
                 case 2:
@@ -89,7 +95,6 @@ public class Sistema {
                     }catch (Exception e){
                         e.printStackTrace();
                     }
-                    
                     usuario.ConsultarReserva(date);//Se llama el metodo de consultar reservas
                     break;
                 case 0:
