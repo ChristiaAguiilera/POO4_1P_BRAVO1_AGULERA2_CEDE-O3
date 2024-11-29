@@ -1,6 +1,9 @@
 package com.poo;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -82,6 +85,9 @@ public class Sistema {
                             a.printStackTrace();
                         }
                         e.reservar(date);
+                        Reserva linea = listaReserva.get(listaReserva.size() - 1);
+
+                        Sistema.EscribirArchivo("reserva.txt", linea);
                     }else if(u.getRol()==Rol.PROFESOR){
                     Profesor p = (Profesor) u;
                     for(String materia: p.getListaMaterias()){
@@ -344,4 +350,45 @@ public class Sistema {
         }
         System.out.println("---------------------------------");
     }
+public static void EscribirArchivo(String nombreArchivo, Reserva linea) {
+        FileWriter fichero = null;
+        BufferedWriter bw = null;
+
+        try {
+            // Verifica si la carpeta "data" existe, y si no, créala
+            File carpeta = new File("data");
+            if (!carpeta.exists()) {
+                carpeta.mkdirs();  // Crea la carpeta "data" si no existe
+            }
+
+            // Crear el archivo en la carpeta "data"
+            fichero = new FileWriter("data/" + nombreArchivo, true);  // Ruta completa a data/reserva.txt
+            bw = new BufferedWriter(fichero);
+
+            // Asegúrate de que el objeto Reserva no sea null
+            if (linea != null) {
+                // Escribe la representación en texto del objeto Reserva
+                bw.write(linea.toString() + "\n");  // Escribir la reserva en el archivo
+                System.out.println("Reserva escrita en el archivo");
+            } else {
+                System.out.println("La reserva está vacía y no se ha escrito nada");
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                // Asegurarse de cerrar los flujos correctamente
+                if (bw != null) {
+                    bw.close();
+                }
+                if (fichero != null) {
+                    fichero.close();
+                }
+            } catch (IOException e2) {
+                e2.printStackTrace();
+            }
+        }
+    }
+
 }
