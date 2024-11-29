@@ -147,7 +147,7 @@ public class Reserva {
     @Override
 public String toString() {
     return String.format(
-        "Código Único de Reserva: %d | Código Único del Usuario: %d | Cédula del Usuario: %s | Fecha de Reserva: %s | Código Único del Espacio Reservado: %s | Tipo de Espacio: %s | Estado: %s | Motivo de la Reserva: %s",
+        "%d |  %d |  %s |  %s |  %s |  %s |  %s |  %s",
         codigo, 
         nombre_user.getCodigo(), // Asumiendo que Usuario tiene un método getCodigoUnico
         nombre_user.getCedula(),     // Asumiendo que Usuario tiene un método getCedula

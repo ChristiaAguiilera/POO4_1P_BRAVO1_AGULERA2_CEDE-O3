@@ -53,7 +53,7 @@ public class Estudiante extends Usuario {
                     }
                 }
             }
-            System.out.println("Motivo de uso");
+            System.out.println("Motivo de uso: ");
             String motivo = sc.nextLine();     
             System.out.println("Deseas crear la reserva?");
             String respuesta = sc.nextLine();

@@ -39,6 +39,7 @@ public class Sistema {
         actualizarEstudiantes();
         actualizarProfesores();
         // Proceso de login
+
         System.out.println("Bienvendio al sistema , Ingrese su usario y contraseña: ");
         System.out.println("Usuario: ");
         String usuario = sc.nextLine();
@@ -47,16 +48,23 @@ public class Sistema {
         // Se recorre la lista para poder encontrar al usuario que se esta intentado
         // entrar
         for (Usuario u : listaUsuario) {
-            if (usuario.equals(u.getUsuario()) && contraseña.equals(u.getContrasena())) {
-                Sistema.usuario = u;
-                System.out.println("Bienvenido al sistema");
-                System.out.println(Sistema.usuario);
+            if(u.getRol().equals(Rol.ESTUDIANTE) || u.getRol().equals(Rol.ESTUDIANTE)){
+                if (usuario.equals(u.getUsuario()) && contraseña.equals(u.getContrasena())) {
+                    Sistema.usuario = u;
+                    System.out.println("Bienvenido al sistema");
+                    System.out.println(Sistema.usuario);
+                    
+                }
+                if (Sistema.usuario == null) {
+                    System.out.println("No existe tu usuario");
+                }
+                mostrar_menu(Sistema.usuario);
+            }else{
+                mostrar_menu_administrador(u);
             }
         }
-        if (Sistema.usuario == null) {
-            System.out.println("No existe tu usuario");
-        }
-        mostrar_menu(Sistema.usuario);
+            
+            
     }
 
     /**
@@ -148,7 +156,7 @@ public class Sistema {
         do {
             System.out.println("Seleccione una de las opciones: ");
             System.out.println("0...Salir");
-            System.out.println("1...Gestioanr Reserva");
+            System.out.println("1...Gestinar Reserva");
             System.out.println("2...Consultar reserva");
             opcion = scanner.nextInt();
             switch (opcion) {
@@ -393,7 +401,7 @@ public class Sistema {
             if (linea != null) {
 
                 bw.write(linea.toString() + "\n");
-
+                System.out.println("Reserva escrita en el archivo");
             } else {
                 System.out.println("La reserva está vacía y no se ha escrito nada");
             }
