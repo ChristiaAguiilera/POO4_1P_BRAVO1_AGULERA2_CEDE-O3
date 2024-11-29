@@ -1,5 +1,7 @@
 package com.poo.Usuario;
 
+import com.poo.Reserva;
+import com.poo.Sistema;
 import com.poo.Enums.*;
 
 
@@ -20,14 +22,16 @@ public class Administrador extends Usuario{
     }
 
     public void ConsultarReserva(){
-
+        System.out.println("Numero de reservas: "+Integer.toString(Sistema.listaReserva.size()));
+        for (Reserva re: Sistema.listaReserva){
+            System.out.println(re.getCodigo()+"-"+re.getEstado()+"-"+re.getUsuario()+"-"+ re.getFecha());
+        }
     }
-
     public Cargo getCargo(){
         return cargo;
     }
-
     public void setCargo(Cargo cargo){
         this.cargo = cargo;
+        
     }
 }

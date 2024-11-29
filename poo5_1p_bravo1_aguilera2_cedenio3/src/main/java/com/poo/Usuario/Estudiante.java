@@ -45,15 +45,18 @@ public class Estudiante extends Usuario {
                 if(espacio.getTipo()==Tipo.CANCHA && espacio.getEstado()==Estado.DISPONIBLE){
                     if(espacio.getNombre().equals(nombre)==true){
                         espacio_reser=espacio;
+                        espacio.setEstado(Estado.RESERVADO);
                     }
                 }
-            }        
+            }
+            System.out.println("Motivo de uso");
+            String motivo = sc.nextLine();     
             System.out.println("Deseas crear la reserva?");
             String respuesta = sc.nextLine();
             if (respuesta.toUpperCase().equals("SI")) {
                 enviar_correo(fecha, nombre, decision);
                 int codigo = ThreadLocalRandom.current().nextInt(1000, 10000);
-                Reserva r= new Reserva(codigo, fecha, nombre, Estado.PENDIENTE, Tipo.CANCHA, this, espacio_reser.getCapacidad());
+                Reserva r= new Reserva(codigo,this.getCodigo(),this.getCedula(),fecha, nombre, Estado.PENDIENTE, Tipo.CANCHA, this, espacio_reser.getCapacidad(),motivo);
                 Sistema.listaReserva.add(r);
             } else {
                 System.out.println("Volviendo al menu");
@@ -75,11 +78,13 @@ public class Estudiante extends Usuario {
                     }
                 }
             }
+            System.out.println("Motivo de uso");
+            String motivo = sc.nextLine();     
             System.out.println("Deseas crear la reserva?");
             String respuesta = sc.nextLine();
             if (respuesta.toUpperCase().equals("SI")) {
                 int codigo = ThreadLocalRandom.current().nextInt(1000, 10000);
-                Reserva r= new Reserva(codigo, fecha, nombre, Estado.PENDIENTE, Tipo.CANCHA, this, espacio_reser.getCapacidad());
+                Reserva r= new Reserva(codigo,this.getCodigo(),this.getCedula(),fecha, nombre, Estado.PENDIENTE, Tipo.CANCHA, this, espacio_reser.getCapacidad(),motivo);
                 Sistema.listaReserva.add(r);
                 enviar_correo(fecha, nombre, decision);
             } else {
@@ -91,8 +96,6 @@ public class Estudiante extends Usuario {
             System.out.println("Volviendo al menu");
         }
     }
-
-
     public int getNumMatricula() {
         return numMatricula;
     }

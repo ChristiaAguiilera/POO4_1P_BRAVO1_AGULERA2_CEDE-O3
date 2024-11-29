@@ -9,22 +9,28 @@ import com.poo.Usuario.Usuario;
 
 public class Reserva {
     private int codigo;
+    private int codigo_usuario;
+    private String cedula;
     private Date fecha;
     private Estado estado;
     private Tipo tipo_espacio;
     private String nombre_espacio;
     private int capacidad;
     private Usuario nombre_user;
+    private String Motivo_reserva;
     public static int numeroReservas;
 
-    public Reserva(int codigo, Date fecha, String nombre, Estado estado, Tipo tipo_espacio, Usuario nombre_user, int capacidad){
+    public Reserva(int codigo,int codigo_usuario,String cedula, Date fecha, String nombre, Estado estado, Tipo tipo_espacio, Usuario nombre_user, int capacidad,String motivo){
         this.codigo = codigo;
+        this.codigo_usuario=codigo_usuario;
+        this.cedula=cedula;
         this.fecha = fecha;
         this.nombre_espacio = nombre;
         this.capacidad = capacidad;
         this.estado = estado;
         this.tipo_espacio = tipo_espacio;
         this.nombre_user = nombre_user;
+        this.Motivo_reserva=motivo;
     }
     
     public void consultar(Date fecha){

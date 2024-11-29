@@ -42,6 +42,7 @@ public class Profesor extends Usuario {
             for(Espacio espacio: Sistema.listaEspacio){
                 if(espacio.getTipo()==Tipo.AULA ||espacio.getTipo()==Tipo.LABORATORIO ||espacio.getTipo()==Tipo.AUDITORIO  && espacio.getEstado()==Estado.DISPONIBLE){
                     espacio_reser=espacio;
+                    espacio.setEstado(Estado.RESERVADO);
                 }
             }
             System.out.println("Deseas crear la reserva?");
@@ -56,7 +57,7 @@ public class Profesor extends Usuario {
             if (respuesta.toUpperCase().equals("SI")) {
                 enviar_correo(materia, nombre, decision);
                 int codigo = ThreadLocalRandom.current().nextInt(1000, 10000);
-                Reserva r= new Reserva(codigo,date, nombre, Estado.APROBADO,espacio_reser.getTipo(), this, espacio_reser.getCapacidad());
+                Reserva r= new Reserva(codigo,this.getCodigo(),this.getCedula(),date, nombre, Estado.PENDIENTE, Tipo.CANCHA, this, espacio_reser.getCapacidad(),"Clases de "+materia);
                 Sistema.listaReserva.add(r);
             } else {
                 Sistema.mostrar_menu(this);

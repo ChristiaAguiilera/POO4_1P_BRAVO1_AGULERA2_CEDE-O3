@@ -27,9 +27,7 @@ public class Sistema {
     public static ArrayList<Espacio> listaEspacio = new ArrayList<>();
     public static ArrayList<Reserva> listaReserva=new ArrayList<>();
     static Usuario usuario;
-
     public static void main(String[] args) {
-
         //Se llaman metodos para poder cargar las listas de objetos
         CargarUsuariosDesdeArchivo("Usuarios.txt");
         cargarEspaciosDesdeArchivo("Espacios.txt"); //Encontrar rutas
@@ -41,7 +39,7 @@ public class Sistema {
         System.out.println("Usuario: ");
         String usuario = sc.nextLine();
         System.out.println("Contraseña: ");
-        String contraseña = sc.nextLine();
+        String contraseña = sc.nextLine(); 
         //Se recorre la lista para poder encontrar al usuario que se esta intentado entrar
         for (Usuario u : listaUsuario) {
             if (usuario.equals(u.getUsuario()) && contraseña.equals(u.getContrasena())){
@@ -53,7 +51,6 @@ public class Sistema {
             System.out.println("No existe tu usuario");
         }
         mostrar_menu(Sistema.usuario);
-      
     }
     public static void mostrar_menu(Usuario u){
         Scanner scanner = new Scanner(System.in);
@@ -115,8 +112,29 @@ public class Sistema {
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
         return dateFormat.parse(dateStr);
     }
+    public static void mostrar_menu_administrador(Usuario us) {
+        int opcion;
+        Administrador ad =(Administrador) us;
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Bienvenido");
+        do{
+            System.out.println("Seleccione una de las opciones: ");
+            System.out.println("0...Salir");
+            System.out.println("1...Gestioanr Reserva");
+            System.out.println("2...Consultar reserva");
+            opcion = scanner.nextInt();
+            switch (opcion) {
+                case 1:
+                    ad.CambiarReserva();
+                    break;
+                case 2:
+                    ad.ConsultarReserva();
+                    break;
+                default:
+                    break;
+            }
 
-    public static void mostrar_menu_administrador() {
+        }while(opcion!= 0);
     }
 
     public static void cargarEspaciosDesdeArchivo(String nombreArchivo) {
