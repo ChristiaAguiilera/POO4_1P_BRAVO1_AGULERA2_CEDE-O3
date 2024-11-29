@@ -26,6 +26,11 @@ public class Profesor extends Usuario {
         this.listaMaterias = listaMaterias;
     }
 
+
+    /**
+     * Permite realizar una reserva para un aula, laboratorio o auditorio.
+     * @param materia la materia asociada con la reserva.
+     */
     // Métodos específicos
     public void reservar(String materia) {
         Espacio espacio_reser=null;
@@ -63,6 +68,8 @@ public class Profesor extends Usuario {
                 Sistema.mostrar_menu(this);
             }
     }
+
+
     @Override
     public String toString() {
         return "Profesor {" +

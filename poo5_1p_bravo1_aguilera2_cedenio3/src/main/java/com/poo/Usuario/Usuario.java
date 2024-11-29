@@ -45,14 +45,29 @@ public abstract class Usuario { // se usa uno de los pilares de la programacion,
     }
 
     // metodos
+
+/**Método abstracto que define la lógica para realizar una reserva.*/
     public abstract void reservar();
 
+    
+/**
+ * Consulta y muestra las reservas realizadas en una fecha específica, es un metodo void por ende no retorna nada.
+ * @param date la fecha de la reserva que se desea consultar.
+ */
     public void ConsultarReserva(Date date) {
         for(Reserva r: Sistema.listaReserva){
             if(r.getFecha().equals(date)) System.out.println(r.toString());
         }
 
     }
+
+/**
+ * Envía un correo de notificación al administrador cuando un estudiante realiza una reserva
+ * para un espacio específico (cancha o aula) en una fecha determinada.
+ * @param fecha    la fecha de la reserva.
+ * @param nombre   el nombre del espacio reservado.
+ * @param desicion el tipo de espacio reservado ("CANCHA" o "AULA").
+ */
 
     // Metodo de enviar correo para estudiantes
     public void enviar_correo(Date fecha, String nombre, String desicion) {
@@ -112,6 +127,15 @@ public abstract class Usuario { // se usa uno de los pilares de la programacion,
         }
 
     }
+
+
+/**
+ * Envía un correo de notificación al administrador dependiendo del tipo de espacio reservado (aula, laboratorio o auditorio).
+ * @param materia  la materia asociada a la reserva.
+ * @param nombre   el nombre del espacio reservado (por ejemplo, "Aula 101").
+ * @param decision el tipo de espacio reservado ("AULA", "LABORATORIO" o "AUDITORIO").
+ */
+
 
     // Metodo enviar correo para profesores
     public void enviar_correo(String materia, String nombre, String decision) {
