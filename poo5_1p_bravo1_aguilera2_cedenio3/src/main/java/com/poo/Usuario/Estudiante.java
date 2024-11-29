@@ -7,14 +7,11 @@ import com.poo.Reserva;
  // import com.poo.Reserva;
 import com.poo.Sistema;
 import com.poo.Enums.*;
-import java.util.Random;
-import java.security.cert.TrustAnchor;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.Scanner;
 import java.util.concurrent.ThreadLocalRandom;
 
-import javax.swing.plaf.TreeUI;
+
 
 public class Estudiante extends Usuario {
     private int numMatricula;
@@ -102,6 +99,7 @@ public class Estudiante extends Usuario {
             System.out.println("No valido vuelva a intentarlo");
             System.out.println("Volviendo al menu");
         }
+        sc.close();
     }
 
     // Getters y Setters.

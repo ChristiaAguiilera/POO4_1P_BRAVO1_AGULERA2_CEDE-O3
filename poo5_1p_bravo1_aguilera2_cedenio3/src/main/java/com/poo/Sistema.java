@@ -1,7 +1,6 @@
 package com.poo;
 
 import java.io.BufferedReader;
-import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -66,9 +65,9 @@ public class Sistema {
         //Imprime las opciones para Usuario
         do {
             System.out.println("Seleccione una de las opciones: ");
-            System.out.println("0...Salir");
-            System.out.println("1...Reservar");
-            System.out.println("2...Consultar reserva");
+            System.out.println("0. Salir");
+            System.out.println("1. Reservar");
+            System.out.println("2. Consultar reserva");
             opcion = scanner.nextInt();
             //Por medio de un switch se desarollan llamadas a cada opcion
             switch (opcion) {

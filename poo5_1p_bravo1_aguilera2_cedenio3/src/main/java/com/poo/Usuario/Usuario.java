@@ -70,9 +70,10 @@ public abstract class Usuario { // se usa uno de los pilares de la programacion,
      */
 
     // Metodo de enviar correo para estudiantes
-    public void enviar_correo(Date fecha, String nombre, String desicion) {
+    public void enviar_correo(Date fecha, String nombre, String decision) {
         // Se instancia el dotenv lo que sirve para poder enviar el correo
         Dotenv dot = Dotenv.load();
+
         String host = dot.get("MAIL_HOST");
         String port = dot.get("MAIL_PORT");
         String user = dot.get("MAIL_USER");
@@ -92,40 +93,42 @@ public abstract class Usuario { // se usa uno de los pilares de la programacion,
                 return new PasswordAuthentication(user, pass);
             }
         });
+
         // Se verifica si son canchas o aulas
-        if (desicion.toUpperCase() == "CANCHA") {
+        if (decision.toUpperCase().equals("CANCHA")==true) {
             // Se envia el correo al administrador
             try {
                 Message mes = new MimeMessage(session);
                 mes.setFrom(new InternetAddress(user, "Reserva Estudiante"));
-                mes.setRecipients(Message.RecipientType.TO, InternetAddress.parse(administrador.getCorreo()));
+                mes.setRecipients(Message.RecipientType.TO, InternetAddress.parse("riicte@gmail.com"));
                 mes.setSubject("Reserva realizada");
-                mes.setText("El estudiante" + getNombre() + " y " + getApellido()
+                mes.setText("El estudiante" + getNombre() + getApellido()
                         + " ha realizado una reservación con codigo " +
-                        getCodigo() + " para la fecha" + fecha + " en la cancha" + nombre
+                        getCodigo() + " para la fecha " + fecha + " en la cancha" + nombre
                         + ". Ingrese al sistema para aprobar o rechazar.");
                 Transport.send(mes);
+                System.out.println("Mensaje enviado");
             } catch (Exception e) {
                 System.out.println(e.getMessage());
             }
 
-        } else if (desicion.toUpperCase() == "AULA") {
+        } else if (decision.toUpperCase().equals("AULA")==true) {
             // Se envia el correo al administrador
             try {
                 Message mes = new MimeMessage(session);
                 mes.setFrom(new InternetAddress(user, "Reserva Estudiante"));
-                mes.setRecipients(Message.RecipientType.TO, InternetAddress.parse(administrador.getCorreo()));
+                mes.setRecipients(Message.RecipientType.TO, InternetAddress.parse("riicte@gmail.com"));
                 mes.setSubject("Reserva realizada");
-                mes.setText("El estudiante" + getNombre() + " y " + getApellido()
+                mes.setText("El estudiante" + getNombre() + getApellido()
                         + " ha realizado una reservación con codigo " +
-                        getCodigo() + " para la fecha" + fecha + " en el aula" + nombre
+                        getCodigo() + " para la fecha " + fecha + " en el aula" + nombre
                         + ". Ingrese al sistema para aprobar o rechazar.");
                 Transport.send(mes);
+                System.out.println("Mensaje enviado");
             } catch (Exception e) {
                 System.out.println(e.getMessage());
             }
         }
-
     }
 
 
@@ -161,47 +164,50 @@ public abstract class Usuario { // se usa uno de los pilares de la programacion,
         });
 
         // Se verifica que tipo de espacio elegio
-        if (decision.toUpperCase() == "AULA") {
+        if (decision.toUpperCase().equals("AULA")==true) {
             // Se envia el correo al administrador
             try {
                 Message mes = new MimeMessage(session);
                 mes.setFrom(new InternetAddress(user, "Reserva Profesor"));
-                mes.setRecipients(Message.RecipientType.TO, InternetAddress.parse(administrador.getCorreo()));
+                mes.setRecipients(Message.RecipientType.TO, InternetAddress.parse("riicte@gmail.com"));
                 mes.setSubject("Reserva realizada");
-                mes.setText("Se le notifica que el profesor " + getNombre() + " y " + getApellido()
-                        + " ha realizado una reserva con código" + getCodigo() + " en el aula " + nombre
+                mes.setText("Se le notifica que el profesor " + getNombre() + getApellido()
+                        + " ha realizado una reserva con códigov" + getCodigo() + " en el aula " + nombre
                         + " para la materia " + materia);
                 Transport.send(mes);
+                System.out.println("Mensaje enviado");
             } catch (Exception e) {
                 System.out.println(e.getMessage());
             }
 
-        } else if (decision.toUpperCase() == "LABORATORIO") {
+        } else if (decision.toUpperCase().equals("LABORATORIO")==true) {
             // Se envia el correo al administrador
             try {
                 Message mes = new MimeMessage(session);
                 mes.setFrom(new InternetAddress(user, "Reserva Profesor"));
-                mes.setRecipients(Message.RecipientType.TO, InternetAddress.parse(administrador.getCorreo()));
+                mes.setRecipients(Message.RecipientType.TO, InternetAddress.parse("riicte@gmail.com"));
                 mes.setSubject("Reserva realizada");
-                mes.setText("Se le notifica que el profesor " + getNombre() + " y " + getApellido()
-                        + " ha realizado una reserva con código" + getCodigo() + " en el laboratorio " + nombre
+                mes.setText("Se le notifica que el profesor " + getNombre() + getApellido()
+                        + " ha realizado una reserva con códigov" + getCodigo() + " en el laboratorio " + nombre
                         + " para la materia " + materia);
                 Transport.send(mes);
+                System.out.println("Mensaje enviado");
             } catch (Exception e) {
                 System.out.println(e.getMessage());
             }
 
-        } else if (decision.toUpperCase() == "AUDITORIO") {
+        } else if (decision.toUpperCase().equals("AUDITORIO")==true) {
             // Se envia el correo al administrador
             try {
                 Message mes = new MimeMessage(session);
                 mes.setFrom(new InternetAddress(user, "Reserva Profesor"));
-                mes.setRecipients(Message.RecipientType.TO, InternetAddress.parse(administrador.getCorreo()));
+                mes.setRecipients(Message.RecipientType.TO, InternetAddress.parse("riicte@gmail.com"));
                 mes.setSubject("Reserva realizada");
-                mes.setText("Se le notifica que el profesor " + getNombre() + " y " + getApellido()
-                        + " ha realizado una reserva con código" + getCodigo() + " en el auditorio " + nombre
+                mes.setText("Se le notifica que el profesor " + getNombre() + getApellido()
+                        + " ha realizado una reserva con código " + getCodigo() + " en el auditorio " + nombre
                         + " para la materia " + materia);
                 Transport.send(mes);
+                System.out.println("Mensaje enviado");
             } catch (Exception e) {
                 System.out.println(e.getMessage());
             }
