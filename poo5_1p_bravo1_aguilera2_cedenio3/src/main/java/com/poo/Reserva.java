@@ -33,13 +33,28 @@ public class Reserva {
         this.Motivo_reserva=motivo;
     }
     
+    /**
+     * Consulta las reservas en el sistema para una fecha específica.
+     * @param fecha La fecha para la cual se desean consultar las reservas.
+     *              Debe ser un objeto `Date` que representa la fecha que se quiere consultar.
+     */
+
     public void consultar(Date fecha){
 
     }
 
+    /**
+     * Muestra los datos detallados de una reserva.
+     */
     public void mostrar_datos_reserva(){
 
     }
+
+    /**
+     * Consulta las reservas en el sistema según el rol del usuario.
+     * @param rol El rol del usuario que realiza la consulta. Este parámetro debe ser un objeto de la clase `Usuario`.
+     *            Dependiendo de este rol, se filtrarán las reservas mostradas.
+     */
 
     public void ConsultarReserva(Usuario rol){
 
@@ -103,6 +118,20 @@ public class Reserva {
     public void setUsuario(Usuario usuario){
         this.nombre_user = usuario;
     }
+
+/**
+ * Devuelve una representación en cadena de texto de la reserva.
+ * @return Una cadena que representa todos los detalles de la reserva en un formato legible.
+ *         El formato incluye la siguiente información:
+ *         - Código único de la reserva
+ *         - Código único del usuario
+ *         - Cédula del usuario
+ *         - Fecha de la reserva
+ *         - Código único del espacio reservado
+ *         - Tipo de espacio reservado (por ejemplo, aula, cancha, etc.)
+ *         - Estado de la reserva (por ejemplo, pendiente, aprobado, rechazado)
+ *         - Motivo de la reserva (si no se especifica, se devuelve "Motivo no especificado").
+ */
 
     @Override
 public String toString() {

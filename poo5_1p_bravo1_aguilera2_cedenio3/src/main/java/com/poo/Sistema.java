@@ -46,12 +46,20 @@ public class Sistema {
                 Sistema.usuario = u;
                 System.out.println("Bienvenido al sistema");
                 System.out.println(Sistema.usuario);
-            } 
+            }
         } if(Sistema.usuario==null){
             System.out.println("No existe tu usuario");
         }
         mostrar_menu(Sistema.usuario);
     }
+
+
+/**
+ * Muestra el menú de opciones para un usuario y permite realizar reservas o consultar reservas, 
+ * dependiendo del rol del usuario (Estudiante o Profesor).
+ * @param u El usuario que interactúa con el sistema. El usuario puede ser de tipo {@link Estudiante} o {@link Profesor}.
+ */
+
     public static void mostrar_menu(Usuario u){
         Scanner scanner = new Scanner(System.in);
         int opcion;
@@ -108,6 +116,13 @@ public class Sistema {
         scanner.close();
     }
 
+
+    /**
+     * Convierte una cadena de texto en un objeto {@link Date}.
+     * @param dateStr La cadena de texto que representa la fecha en formato "dd/MM/yyyy".
+     * @return Un objeto {@link Date} correspondiente a la cadena proporcionada.
+     */
+
     public static Date getDateFromString(String dateStr) throws ParseException {
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
         return dateFormat.parse(dateStr);
@@ -138,6 +153,12 @@ public class Sistema {
         scanner.close();
     }
 
+/**
+ * Carga los espacios desde un archivo de texto y los agrega a la lista de espacios del sistema.
+ * @param nombreArchivo El nombre del archivo que contiene la información de los espacios.
+ *                      Este archivo debe estar ubicado en la carpeta `Archivos/` dentro de los recursos del proyecto.
+ */
+
     public static void cargarEspaciosDesdeArchivo(String nombreArchivo) {
         try (InputStream inputStream = Sistema.class.getClassLoader().getResourceAsStream("Archivos/" + nombreArchivo);
                 BufferedReader br = new BufferedReader(new InputStreamReader(inputStream))) {
@@ -167,6 +188,13 @@ public class Sistema {
             e.printStackTrace();
         }
     }
+
+/**
+ * Carga los usuarios desde un archivo de texto y los agrega a la lista de usuarios del sistema.
+ * @param nombreArchivo El nombre del archivo que contiene la información de los usuarios.
+ *                      Este archivo debe estar ubicado en la carpeta `Archivos/` dentro de los recursos del proyecto.
+ */
+
     //Se repite la logica para usuarios
     public static void CargarUsuariosDesdeArchivo(String nombreArchivo) {
         try (InputStream inputStream = Sistema.class.getClassLoader().getResourceAsStream("Archivos/" + nombreArchivo);
@@ -200,6 +228,12 @@ public class Sistema {
         }
     }
 
+
+/**
+ * Carga los usuarios desde un archivo de texto y los agrega a la lista de usuarios del sistema.
+ * @param nombreArchivo El nombre del archivo que contiene la información de los usuarios.
+ *                      Este archivo debe estar ubicado en la carpeta `Archivos/` dentro de los recursos del proyecto.
+ */
     public static void CargarAdministradoresDesdeArchivo(String nombreArchivo) {
         try (InputStream inputStream = Sistema.class.getClassLoader().getResourceAsStream("Archivos/" + nombreArchivo);
         BufferedReader br = new BufferedReader(new InputStreamReader(inputStream))) {
@@ -223,6 +257,13 @@ public class Sistema {
             System.out.println("Error en el formato del archivo: " + e.getMessage());
         }
     }
+
+    /**
+     * Actualiza la información de los estudiantes en la lista de usuarios desde un archivo de texto.
+     * El archivo debe contener los datos del estudiante con el siguiente formato:
+     * "codigo|cedula|nombre|apellido|numMatricula|carrera".
+     */
+        
     //Actualiza campos de los estudiantes dependiendo de sus campos respectivos
     public static void actualizarEstudiantes() {
         try (InputStream inputStream = Sistema.class.getClassLoader().getResourceAsStream("Archivos/" + "Estudiante.txt");
@@ -247,6 +288,11 @@ public class Sistema {
         }
     }
 
+    /**
+     * Actualiza la información de los profesores en la lista de usuarios desde un archivo de texto.
+     * El archivo debe contener los datos del profesor con el siguiente formato:
+     * "codigo|cedula|nombre|apellido|usuario|facultad|materias".
+     */
 
     //Lee el archivo de profesores
     public static void actualizarProfesores() {
@@ -274,6 +320,11 @@ public class Sistema {
             e.printStackTrace();
         }
     }
+
+
+/**
+ * Muestra una lista de los espacios disponibles en el sistema.
+*/
 
     public void mostrar_espacios_disponibles() {
         System.out.println("----- Espacios Disponibles -----");

@@ -69,6 +69,10 @@ public class Profesor extends Usuario {
             }
     }
 
+    /**
+     * Devuelve una representación en forma de cadena del objeto `Profesor`.
+     * @return una cadena que representa el objeto `Profesor` con sus atributos clave.
+     */
 
     @Override
     public String toString() {

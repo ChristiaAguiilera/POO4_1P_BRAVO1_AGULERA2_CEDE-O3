@@ -14,12 +14,24 @@ public class Administrador extends Usuario{
         this.cargo = cargo;
     }
 
+    /**
+    * Realiza una reserva de un espacio (cancha, aula, laboratorio, etc.) en el sistema.
+    */
     public void reservar(){
 
     }
+
+    /**
+     * Cambia los detalles de una reserva existente en el sistema.
+     */
+
     public void CambiarReserva(){
 
     }
+
+    /**
+     * Consulta y muestra todas las reservas almacenadas en el sistema.
+     */
 
     public void ConsultarReserva(){
         System.out.println("Numero de reservas: "+Integer.toString(Sistema.listaReserva.size()));

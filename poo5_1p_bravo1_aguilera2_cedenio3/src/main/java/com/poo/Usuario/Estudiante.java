@@ -1,7 +1,7 @@
 //La clase estudiante usa uno de los pilares de la programacion orientada a objetos que es la herencia. 
 
 package com.poo.Usuario;
- import com.poo.Espacio;
+import com.poo.Espacio;
 import com.poo.Reserva;
 // import com.poo.Espacio;
  // import com.poo.Reserva;
@@ -24,9 +24,16 @@ public class Estudiante extends Usuario {
             String correo, int numMatricula, String carrera) {
         super(codigo, cedula, nombre, apellido, usuario, contrasena, correo, Rol.ESTUDIANTE);
         this.numMatricula = numMatricula;
-        this.carrera = carrera; 
+        this.carrera = carrera;
     }
-    public void reservar(Date fecha) { 
+
+
+    /**
+     * Permite reservar un espacio de tipo cancha o aula en una fecha específica.
+     * @param fecha la fecha en la que se desea realizar la reserva.
+     */
+
+    public void reservar(Date fecha) {
         Espacio espacio_reser=null;
         Scanner sc = new Scanner(System.in);
         System.out.println("Deseas reservar una cancha o un aula?");
@@ -96,6 +103,9 @@ public class Estudiante extends Usuario {
             System.out.println("Volviendo al menu");
         }
     }
+
+    // Getters y Setters.
+
     public int getNumMatricula() {
         return numMatricula;
     }
@@ -112,6 +122,10 @@ public class Estudiante extends Usuario {
         this.carrera = carrera;
     }
 
+    /**
+     * Devuelve una representación en forma de cadena del objeto Estudiante.
+     * @return una cadena que representa el objeto `Estudiante` con sus atributos clave.
+     */
     @Override
     public String toString() {
         return "Estudiante [numMatricula=" + numMatricula + ", carrera=" + carrera + ", getCodigo()=" + getCodigo()
