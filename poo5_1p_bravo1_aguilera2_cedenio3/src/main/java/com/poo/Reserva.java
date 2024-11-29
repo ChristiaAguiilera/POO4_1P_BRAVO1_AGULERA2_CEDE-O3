@@ -119,6 +119,17 @@ public class Reserva {
         this.nombre_user = usuario;
     }
 
+    public String getMotivo(){
+        return Motivo_reserva;
+    }
+
+    public String getCedula(){
+        return cedula;
+    }
+
+    public int getCodigoUser(){
+        return codigo_usuario;
+    }
 /**
  * Devuelve una representación en cadena de texto de la reserva.
  * @return Una cadena que representa todos los detalles de la reserva en un formato legible.

@@ -73,6 +73,7 @@ public class Profesor extends Usuario {
         } else {
             Sistema.mostrar_menu(this);
         }
+        sc.close();
     }
 
     /**
